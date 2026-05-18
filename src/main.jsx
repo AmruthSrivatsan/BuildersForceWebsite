@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const contactEmail = 'suryan@buildersforce.ai';
+const contactHref = '#contact';
 
 const mailtoHref = `mailto:${contactEmail}?subject=${encodeURIComponent(
   'Build with Builders Force',
@@ -197,7 +198,7 @@ function Hero() {
             We partner with teams to discover the right problems, build intelligent
             solutions, and deliver measurable outcomes at scale.
           </p>
-          <a className="primary-cta" href={mailtoHref}>
+          <a className="primary-cta" href={contactHref}>
             Build with us
             <span aria-hidden="true">→</span>
           </a>
@@ -213,7 +214,7 @@ function ForceScroll() {
   const activeSection = forceSections[active];
 
   return (
-    <section className="force-scroll" ref={sectionRef} aria-label="Builders Force AI principles">
+    <section className="force-scroll snap-page" ref={sectionRef} aria-label="Builders Force AI principles">
       <div className="force-sticky">
         <div className="force-orbit" aria-hidden="true">
           <span />
@@ -252,7 +253,7 @@ function ForceScroll() {
 
 function WhoWeAre() {
   return (
-    <section className="who section-band">
+    <section className="who section-band snap-page">
       <div className="section-inner split">
         <SectionHeader
           eyebrow="Who we are"
@@ -274,23 +275,25 @@ function WhoWeAre() {
 
 function Team() {
   return (
-    <section className="section-inner">
-      <SectionHeader
-        eyebrow="Team glimpse"
-        title="A compact team built around ownership."
-        copy="Placeholder profiles for now, ready for real photos and links."
-      />
-      <div className="team-grid">
-        {team.map((member) => (
-          <article className="team-card" key={member.name}>
-            <div className="avatar">{member.initials}</div>
-            <div>
-              <h3>{member.name}</h3>
-              <p>{member.role}</p>
-              <a href={member.link}>LinkedIn placeholder</a>
-            </div>
-          </article>
-        ))}
+    <section className="snap-page">
+      <div className="section-inner">
+        <SectionHeader
+          eyebrow="Team glimpse"
+          title="A compact team built around ownership."
+          copy="Placeholder profiles for now, ready for real photos and links."
+        />
+        <div className="team-grid">
+          {team.map((member) => (
+            <article className="team-card" key={member.name}>
+              <div className="avatar">{member.initials}</div>
+              <div>
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+                <a href={member.link}>LinkedIn placeholder</a>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -298,7 +301,7 @@ function Team() {
 
 function Process() {
   return (
-    <section className="process section-band">
+    <section className="process section-band snap-page">
       <div className="section-inner">
         <SectionHeader
           eyebrow="How we build"
@@ -329,33 +332,35 @@ function Process() {
 
 function Proof() {
   return (
-    <section className="section-inner proof">
-      <SectionHeader
-        eyebrow="Proof in progress"
-        title="Case glimpses, anonymized clients and early signals."
-        copy="These placeholders keep the layout ready for real proof points when you want to add them."
-      />
-      <div className="proof-grid">
-        {cases.map((item) => (
-          <article className="case-card" key={item.title}>
-            <p className="eyebrow">{item.eyebrow}</p>
-            <h3>{item.title}</h3>
-            <p>{item.copy}</p>
-          </article>
-        ))}
-      </div>
-      <div className="client-strip" aria-label="Anonymized clients">
-        {clients.map((client) => (
-          <div key={client}>{client}</div>
-        ))}
-      </div>
-      <div className="testimonial-grid">
-        {testimonials.map((item) => (
-          <blockquote key={item.person}>
-            <p>“{item.quote}”</p>
-            <cite>{item.person}</cite>
-          </blockquote>
-        ))}
+    <section className="snap-page">
+      <div className="section-inner proof">
+        <SectionHeader
+          eyebrow="Proof in progress"
+          title="Case glimpses, anonymized clients and early signals."
+          copy="These placeholders keep the layout ready for real proof points when you want to add them."
+        />
+        <div className="proof-grid">
+          {cases.map((item) => (
+            <article className="case-card" key={item.title}>
+              <p className="eyebrow">{item.eyebrow}</p>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="client-strip" aria-label="Anonymized clients">
+          {clients.map((client) => (
+            <div key={client}>{client}</div>
+          ))}
+        </div>
+        <div className="testimonial-grid">
+          {testimonials.map((item) => (
+            <blockquote key={item.person}>
+              <p>“{item.quote}”</p>
+              <cite>{item.person}</cite>
+            </blockquote>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -363,7 +368,7 @@ function Proof() {
 
 function Services() {
   return (
-    <section className="services section-band">
+    <section className="services section-band snap-page">
       <div className="section-inner">
         <SectionHeader
           eyebrow="Services and control"
@@ -418,7 +423,7 @@ Thanks,`)}`,
   );
 
   return (
-    <footer className="footer">
+    <footer className="footer snap-page" id="contact">
       <div className="section-inner footer-grid">
         <div className="footer-contact">
           <a className="brand footer-brand" href="https://buildersforce.ai">
@@ -429,7 +434,7 @@ Thanks,`)}`,
             Build intelligent solutions with people who take responsibility for
             the outcome.
           </p>
-          <a className="primary-cta" href={mailtoHref}>
+          <a className="primary-cta" href={contactHref}>
             Build with us
             <span aria-hidden="true">→</span>
           </a>

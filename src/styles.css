@@ -24,6 +24,8 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 0;
   background: var(--paper);
 }
 
@@ -74,6 +76,8 @@ p {
   padding: 28px;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 .hero::before,
@@ -199,9 +203,17 @@ p {
 .force-scroll {
   height: 300svh;
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 249, 253, 0.96)),
     linear-gradient(135deg, rgba(223, 241, 255, 0.9), rgba(238, 233, 255, 0.7));
+}
+
+.snap-page {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 .force-sticky {
