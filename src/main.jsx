@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-import suryanHeadshot from './assets/suryan-headshot.png';
+import suryanHeadshot from './assets/suryan-headshot.jpeg';
 import venkatHeadshot from './assets/venkat-headshot.jpeg';
 
 const contactEmail = 'suryan@buildersforce.ai';
