@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
+import suryanHeadshot from './assets/suryan-headshot.png';
+import venkatHeadshot from './assets/venkat-headshot.jpeg';
 
 const contactEmail = 'suryan@buildersforce.ai';
 const contactHref = '#contact';
@@ -17,7 +19,6 @@ Role:
 Business challenge:
 What we want to build / improve:
 Timeline:
-Preferred contact number:
 
 Thanks,`)}`;
 
@@ -71,45 +72,32 @@ const team = [
     name: 'Suryanarayanan Ramamurthy',
     role: 'Founder, Chief Builder',
     initials: 'SR',
-    link: 'https://example.com/suryanarayanan',
+    image: suryanHeadshot,
+    link: 'https://www.linkedin.com/in/suryan/',
   },
   {
     name: 'Venkat Sriraman',
-    role: 'Customer Success',
+    role: 'Co-Founder, Client Success',
     initials: 'VS',
-    link: 'https://example.com/venkat',
+    image: venkatHeadshot,
+    link: 'https://www.linkedin.com/in/venkataramanan-sriraman-904603/',
   },
 ];
 
 const processSteps = ['Discover', 'Design', 'Build', 'Test', 'Deploy'];
 
-const cases = [
+const proofItems = [
   {
-    title: 'Case glimpse 01',
-    eyebrow: 'Anonymized client',
+    title: 'Client engagement 01',
+    eyebrow: 'Early client',
     copy:
       'Mapped a manual operating workflow, identified automation opportunities, and shaped a practical AI delivery roadmap.',
   },
   {
-    title: 'Case glimpse 02',
-    eyebrow: 'Anonymized client',
+    title: 'Client engagement 02',
+    eyebrow: 'Early client',
     copy:
       'Built an integrated prototype layer that helped teams move faster while keeping data ownership and controls intact.',
-  },
-];
-
-const clients = ['Client Alpha', 'Client Beta'];
-
-const testimonials = [
-  {
-    quote:
-      'Builders Force helped us move from scattered ideas to a working path with clarity and pace.',
-    person: 'Business leader, anonymized client',
-  },
-  {
-    quote:
-      'The team cared about adoption and outcomes, not just the technical build.',
-    person: 'Operations sponsor, anonymized client',
   },
 ];
 
@@ -130,15 +118,10 @@ const serviceModels = [
 
 const compliance = [
   'SOC 2',
-  'ISO/IEC 27001',
-  'NIST Framework',
-  'GDPR',
+  'ISO 27001',
   'HIPAA',
-  'PCI DSS',
-  'FedRAMP',
-  'CMMC',
-  'CIS Benchmarks',
-  'FISMA',
+  'GDPR',
+  'Others on request',
 ];
 
 const careers = [
@@ -278,18 +261,18 @@ function Team() {
     <section className="snap-page">
       <div className="section-inner">
         <SectionHeader
-          eyebrow="Team glimpse"
+          eyebrow="Team"
           title="A compact team built around ownership."
-          copy="Placeholder profiles for now, ready for real photos and links."
+          copy="Builders Force is led by operators who stay close to client outcomes."
         />
         <div className="team-grid">
           {team.map((member) => (
             <article className="team-card" key={member.name}>
-              <div className="avatar">{member.initials}</div>
+              <img className="avatar" src={member.image} alt={`${member.name} headshot`} />
               <div>
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>
-                <a href={member.link}>LinkedIn placeholder</a>
+                <a href={member.link} target="_blank" rel="noreferrer">LinkedIn</a>
               </div>
             </article>
           ))}
@@ -336,30 +319,17 @@ function Proof() {
     <section className="snap-page">
       <div className="section-inner proof">
         <SectionHeader
-          eyebrow="Proof in progress"
-          title="Case glimpses, anonymized clients and early signals."
-          copy="These placeholders keep the layout ready for real proof points when you want to add them."
+          eyebrow="Early work"
+          title="Two client engagements, captured in one place for now."
+          copy="Until public client names and testimonials are ready, we are keeping proof focused on anonymized engagement snapshots."
         />
         <div className="proof-grid">
-          {cases.map((item) => (
+          {proofItems.map((item) => (
             <article className="case-card" key={item.title}>
               <p className="eyebrow">{item.eyebrow}</p>
               <h3>{item.title}</h3>
               <p>{item.copy}</p>
             </article>
-          ))}
-        </div>
-        <div className="client-strip" aria-label="Anonymized clients">
-          {clients.map((client) => (
-            <div key={client}>{client}</div>
-          ))}
-        </div>
-        <div className="testimonial-grid">
-          {testimonials.map((item) => (
-            <blockquote key={item.person}>
-              <p>“{item.quote}”</p>
-              <cite>{item.person}</cite>
-            </blockquote>
           ))}
         </div>
       </div>
@@ -391,7 +361,8 @@ function Services() {
             <h3>Built for conversations where controls matter.</h3>
             <p>
               Builders Force supports delivery against common enterprise security,
-              privacy and governance frameworks.
+              privacy and governance frameworks, with additional compliance needs
+              handled based on the client environment.
             </p>
           </div>
           <div className="badge-cloud">
@@ -415,7 +386,6 @@ I would like to apply for: ${selectedRole}
 
 Name:
 Email:
-Phone:
 Portfolio / LinkedIn:
 Why this role:
 
@@ -445,16 +415,8 @@ Thanks,`)}`,
               <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
             </li>
             <li>
-              <strong>Phone</strong>
-              <span>+91 90000 00001 · +91 90000 00002</span>
-            </li>
-            <li>
-              <strong>Address</strong>
-              <span>12 Innovation Avenue, Bengaluru, Karnataka 560001</span>
-            </li>
-            <li>
-              <strong>Social</strong>
-              <a href="https://example.com/buildersforce">Company link placeholder</a>
+              <strong>LinkedIn</strong>
+              <a href="https://www.linkedin.com/in/suryan/" target="_blank" rel="noreferrer">Connect with Suryan</a>
             </li>
           </ul>
         </div>

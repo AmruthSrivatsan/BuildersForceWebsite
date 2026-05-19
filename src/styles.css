@@ -551,14 +551,10 @@ blockquote:hover,
   width: 88px;
   height: 88px;
   flex: 0 0 88px;
-  display: grid;
-  place-items: center;
   border-radius: 8px;
-  color: white;
-  background:
-    linear-gradient(135deg, rgba(32, 63, 104, 0.95), rgba(112, 87, 200, 0.82)),
-    var(--navy);
-  font-weight: 850;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 0 14px 34px rgba(32, 63, 104, 0.16);
 }
 
 .team-card h3,
