@@ -743,6 +743,18 @@ blockquote cite {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.services .section-inner {
+  padding-block: clamp(64px, 8vw, 96px);
+}
+
+.services .section-header {
+  max-width: 1040px;
+}
+
+.services .service-grid {
+  margin-top: 26px;
+}
+
 .service-glyph {
   display: block;
   width: 48px;
@@ -788,7 +800,7 @@ blockquote cite {
   grid-template-columns: minmax(260px, 0.72fr) 1fr;
   gap: 28px;
   align-items: center;
-  margin-top: 22px;
+  margin-top: 16px;
   padding: 28px;
   border-radius: 8px;
   background: var(--navy);
