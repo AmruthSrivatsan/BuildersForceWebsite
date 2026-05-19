@@ -579,7 +579,6 @@ blockquote:hover,
 blockquote p,
 .compliance p,
 .footer p,
-.contact-list,
 .career-row p {
   color: var(--muted);
 }
@@ -841,11 +840,11 @@ blockquote cite {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.88fr) minmax(360px, 1.12fr);
+  grid-template-columns: minmax(220px, 0.62fr) minmax(360px, 1.38fr);
   gap: clamp(32px, 6vw, 72px);
+  align-items: start;
 }
 
-.footer-brand,
 .footer .eyebrow,
 .footer h2,
 .footer strong {
@@ -858,22 +857,9 @@ blockquote cite {
   color: rgba(255, 255, 255, 0.76);
 }
 
-.contact-list {
-  display: grid;
-  gap: 14px;
-  margin: 32px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.contact-list li {
-  display: grid;
-  gap: 4px;
-}
-
-.contact-list a,
-.contact-list span {
-  color: rgba(255, 255, 255, 0.74);
+.footer-contact {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .career-list {
@@ -920,7 +906,8 @@ blockquote cite {
 }
 
 .apply-form input,
-.apply-form textarea {
+.apply-form textarea,
+.apply-form button {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
@@ -928,6 +915,19 @@ blockquote cite {
   color: white;
   background: rgba(255, 255, 255, 0.08);
   outline: none;
+}
+
+.file-field {
+  display: grid;
+  gap: 8px;
+}
+
+.file-field input {
+  cursor: pointer;
+}
+
+.apply-form .secondary-cta {
+  margin-top: 0;
 }
 
 .apply-form input::placeholder,

@@ -7,21 +7,6 @@ import venkatHeadshot from './assets/venkat-headshot.jpeg';
 const contactEmail = 'suryan@buildersforce.ai';
 const contactHref = '#contact';
 
-const mailtoHref = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  'Build with Builders Force',
-)}&body=${encodeURIComponent(`Hi Builders Force,
-
-I would like to explore building with you.
-
-Name:
-Company:
-Role:
-Business challenge:
-What we want to build / improve:
-Timeline:
-
-Thanks,`)}`;
-
 const forceSections = [
   {
     key: 'builders',
@@ -384,7 +369,7 @@ function Services() {
 }
 
 function Footer() {
-  const [selectedRole, setSelectedRole] = useState(careers[0]);
+  const [selectedRole, setSelectedRole] = useState('');
   const applicationHref = useMemo(
     () =>
       `mailto:${contactEmail}?subject=${encodeURIComponent(`Career interest: ${selectedRole}`)}&body=${encodeURIComponent(`Hi Builders Force,
@@ -400,32 +385,20 @@ Thanks,`)}`,
     [selectedRole],
   );
 
+  const handleApplicationSubmit = (event) => {
+    event.preventDefault();
+    if (!event.currentTarget.reportValidity()) return;
+    window.location.href = applicationHref;
+  };
+
   return (
     <footer className="footer snap-page" id="contact">
       <div className="section-inner footer-grid">
         <div className="footer-contact">
-          <a className="brand footer-brand" href="https://buildersforce.ai">
-            <span className="brand-mark">bf</span>
-            <span>buildersforce.ai</span>
-          </a>
-          <p>
-            Build intelligent solutions with people who take responsibility for
-            the outcome.
-          </p>
-          <a className="primary-cta" href={contactHref}>
+          <a className="primary-cta" href={`mailto:${contactEmail}`}>
             Build with us
             <span aria-hidden="true">→</span>
           </a>
-          <ul className="contact-list">
-            <li>
-              <strong>Email</strong>
-              <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-            </li>
-            <li>
-              <strong>LinkedIn</strong>
-              <a href="https://www.linkedin.com/in/suryan/" target="_blank" rel="noreferrer">Connect with Suryan</a>
-            </li>
-          </ul>
         </div>
         <div className="careers">
           <p className="eyebrow">Careers</p>
@@ -440,18 +413,25 @@ Thanks,`)}`,
               </article>
             ))}
           </div>
-          <form className="apply-form" onSubmit={(event) => event.preventDefault()}>
-            <label htmlFor="role">Placeholder application form</label>
-            <input id="role" value={selectedRole} readOnly />
-            <div className="form-row">
-              <input aria-label="Name" placeholder="Name" />
-              <input aria-label="Email" placeholder="Email" />
-            </div>
-            <textarea aria-label="Why this role" placeholder="Why this role?" rows="4" />
-            <a className="secondary-cta" href={applicationHref}>
-              Apply placeholder
-            </a>
-          </form>
+          {selectedRole ? (
+            <form className="apply-form" onSubmit={handleApplicationSubmit}>
+              <label htmlFor="role">Application form</label>
+              <input id="role" value={selectedRole} readOnly />
+              <div className="form-row">
+                <input aria-label="Name" placeholder="Name" required />
+                <input aria-label="Email" placeholder="Email" type="email" required />
+              </div>
+              <input aria-label="Portfolio or LinkedIn" placeholder="Portfolio / LinkedIn" />
+              <label className="file-field" htmlFor="resume">
+                CV / Resume
+                <input id="resume" type="file" accept=".pdf,.doc,.docx" required />
+              </label>
+              <textarea aria-label="Why this role" placeholder="Why this role?" rows="4" required />
+              <button className="secondary-cta" type="submit">
+                Submit application
+              </button>
+            </form>
+          ) : null}
         </div>
       </div>
     </footer>
