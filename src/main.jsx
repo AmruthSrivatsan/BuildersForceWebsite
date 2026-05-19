@@ -308,22 +308,23 @@ function Process() {
           title="A delivery loop from discovery to scale."
           copy="Clean enough to understand quickly, structured enough to keep momentum after deployment."
         />
-        <div className="process-flow">
-          {processSteps.map((step, index) => (
-            <React.Fragment key={step}>
-              <article className="process-step">
-                <div className="step-icon" aria-hidden="true">
-                  {index + 1}
-                </div>
-                <h3>{step}</h3>
-              </article>
-              {index < processSteps.length - 1 ? <div className="flow-arrow" aria-hidden="true" /> : null}
-            </React.Fragment>
-          ))}
-        </div>
-        <div className="optimize-loop">
-          <span>Optimise &amp; Scale</span>
-          <p>Deploy returns insight into testing, refinement and scale.</p>
+        <div className="process-map">
+          <div className="process-flow">
+            {processSteps.map((step, index) => (
+              <React.Fragment key={step}>
+                <article className="process-step">
+                  <div className="step-icon" aria-hidden="true">
+                    {index + 1}
+                  </div>
+                  <h3>{step}</h3>
+                </article>
+                {index < processSteps.length - 1 ? <div className="flow-arrow" aria-hidden="true" /> : null}
+              </React.Fragment>
+            ))}
+          </div>
+          <div className="optimize-loop" aria-label="Optimise and scale loops from Deploy back to Test">
+            <span>Optimise &amp; Scale</span>
+          </div>
         </div>
       </div>
     </section>

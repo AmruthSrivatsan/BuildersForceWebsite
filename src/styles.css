@@ -6,6 +6,8 @@
   --sky: #dff1ff;
   --purple: #7057c8;
   --purple-soft: #eee9ff;
+  --hover-purple: #f0eaff;
+  --hover-navy: #edf5ff;
   --paper: #ffffff;
   --mist: #f6f9fd;
   --line: #dbe5ef;
@@ -433,6 +435,84 @@ blockquote,
   box-shadow: var(--shadow);
 }
 
+.principle,
+.value-card,
+.team-card,
+.case-card,
+.service-card,
+blockquote,
+.process-step,
+.client-strip div,
+.compliance,
+.service-glyph,
+.career-row,
+.badge-cloud span,
+.apply-form,
+.primary-cta,
+.secondary-cta,
+.career-row button,
+.apply-form input,
+.apply-form textarea {
+  transform-origin: center;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.principle:hover,
+.value-card:hover,
+.team-card:hover,
+.case-card:hover,
+.service-card:hover,
+blockquote:hover,
+.process-step:hover,
+.client-strip div:hover,
+.service-glyph:hover {
+  border-color: rgba(112, 87, 200, 0.36);
+  background: var(--hover-purple);
+  box-shadow: 0 24px 64px rgba(32, 63, 104, 0.16);
+  transform: scale(1.015);
+}
+
+.force-scroll .principle:hover,
+.process .process-step:hover,
+.services .service-card:hover,
+.client-strip div:hover {
+  border-color: rgba(31, 112, 184, 0.34);
+  background: var(--hover-navy);
+}
+
+.career-row:hover,
+.badge-cloud span:hover,
+.apply-form:hover,
+.compliance:hover,
+.apply-form input:hover,
+.apply-form textarea:hover {
+  border-color: rgba(238, 233, 255, 0.56);
+  background: rgba(240, 234, 255, 0.18);
+  transform: scale(1.01);
+}
+
+.compliance:hover {
+  background:
+    linear-gradient(135deg, rgba(32, 63, 104, 0.98), rgba(112, 87, 200, 0.9)),
+    var(--navy);
+}
+
+.career-row:hover,
+.badge-cloud span:hover,
+.compliance:hover {
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.14);
+}
+
+.primary-cta:hover,
+.secondary-cta:hover,
+.career-row button:hover {
+  transform: translateY(-2px) scale(1.015);
+}
+
 .value-card {
   padding: 24px;
 }
@@ -508,11 +588,16 @@ blockquote p,
   font-weight: 780;
 }
 
+.process-map {
+  position: relative;
+  margin-top: 42px;
+  padding-bottom: 86px;
+}
+
 .process-flow {
   display: flex;
   gap: 14px;
   align-items: center;
-  margin-top: 42px;
 }
 
 .process-step {
@@ -562,23 +647,48 @@ blockquote p,
 }
 
 .optimize-loop {
-  width: min(520px, 100%);
-  margin: 22px auto 0;
-  padding: 18px 22px;
-  border: 1px dashed rgba(112, 87, 200, 0.48);
-  border-radius: 8px;
-  background: rgba(238, 233, 255, 0.52);
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  width: 27%;
+  min-width: 190px;
+  height: 72px;
   text-align: center;
+  pointer-events: none;
+}
+
+.optimize-loop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-bottom: 2px solid rgba(112, 87, 200, 0.42);
+  border-left: 2px solid rgba(112, 87, 200, 0.42);
+  border-radius: 0 0 0 42px;
+}
+
+.optimize-loop::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -3px;
+  width: 10px;
+  height: 10px;
+  border-left: 2px solid rgba(112, 87, 200, 0.62);
+  border-top: 2px solid rgba(112, 87, 200, 0.62);
+  transform: rotate(45deg);
 }
 
 .optimize-loop span {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  padding: 4px 10px;
   color: var(--purple);
+  background: rgba(250, 248, 255, 0.96);
+  border-radius: 999px;
   font-weight: 850;
-}
-
-.optimize-loop p {
-  margin-top: 4px;
-  color: var(--muted);
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .case-card,
@@ -826,6 +936,10 @@ blockquote cite {
     grid-template-columns: 1fr;
   }
 
+  .process-map {
+    padding-bottom: 0;
+  }
+
   .process-flow {
     align-items: stretch;
     flex-direction: column;
@@ -848,6 +962,39 @@ blockquote cite {
     top: auto;
     bottom: 0;
     transform: translateX(-50%) rotate(135deg);
+  }
+
+  .optimize-loop {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(210px, 68%);
+    height: 110px;
+    margin: -4px 34px 0 auto;
+  }
+
+  .optimize-loop::before {
+    border-top: 2px solid rgba(112, 87, 200, 0.42);
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 2px solid rgba(112, 87, 200, 0.42);
+    border-radius: 0 42px 0 0;
+  }
+
+  .optimize-loop::after {
+    left: auto;
+    right: -4px;
+    top: 100%;
+    border-left: 0;
+    border-top: 0;
+    border-right: 2px solid rgba(112, 87, 200, 0.62);
+    border-bottom: 2px solid rgba(112, 87, 200, 0.62);
+    transform: translateY(-8px) rotate(45deg);
+  }
+
+  .optimize-loop span {
+    top: 16px;
+    bottom: auto;
   }
 }
 
