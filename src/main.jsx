@@ -258,7 +258,7 @@ function WhoWeAre() {
 
 function Team() {
   return (
-    <section className="snap-page">
+    <section className="team-section snap-page">
       <div className="section-inner">
         <SectionHeader
           eyebrow="Team"

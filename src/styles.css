@@ -540,18 +540,24 @@ blockquote:hover,
   margin-top: 34px;
 }
 
+.team-section .section-header {
+  margin-inline: auto;
+  text-align: center;
+}
+
 .team-card {
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-items: center;
   gap: 20px;
   padding: 24px;
   color: inherit;
+  text-align: center;
 }
 
 .avatar {
-  width: 88px;
-  height: 88px;
-  flex: 0 0 88px;
+  width: 112px;
+  height: 112px;
   border-radius: 8px;
   object-fit: cover;
   object-position: center top;
@@ -1057,11 +1063,6 @@ blockquote cite {
 
   .section-inner {
     width: min(100% - 32px, 1120px);
-  }
-
-  .team-card {
-    align-items: flex-start;
-    flex-direction: column;
   }
 
   .career-row {
