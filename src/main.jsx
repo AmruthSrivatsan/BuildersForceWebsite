@@ -399,10 +399,11 @@ Thanks,`)}`,
             Build with us
             <span aria-hidden="true">→</span>
           </a>
+          <p>Start a conversation about an AI solution, workflow, or operating problem.</p>
         </div>
         <div className="careers">
           <p className="eyebrow">Careers</p>
-          <h2>Intern roles for builders with range.</h2>
+          <h2>Intern roles.</h2>
           <div className="career-list">
             {careers.map((role) => (
               <article className="career-row" key={role}>

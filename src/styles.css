@@ -838,11 +838,15 @@ blockquote cite {
   color: white;
 }
 
+.footer .section-inner {
+  padding-block: clamp(44px, 6vw, 76px);
+}
+
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(220px, 0.62fr) minmax(360px, 1.38fr);
-  gap: clamp(32px, 6vw, 72px);
-  align-items: start;
+  grid-template-columns: minmax(320px, 1fr) minmax(340px, 0.85fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
 }
 
 .footer .eyebrow,
@@ -852,39 +856,60 @@ blockquote cite {
 }
 
 .footer-contact > p {
-  max-width: 480px;
-  margin-top: 26px;
-  color: rgba(255, 255, 255, 0.76);
+  max-width: 440px;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
 }
 
 .footer-contact {
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  justify-items: start;
+  padding: clamp(24px, 4vw, 38px);
+  border: 1px solid rgba(238, 233, 255, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(31, 112, 184, 0.24), rgba(112, 87, 200, 0.2)),
+    rgba(255, 255, 255, 0.06);
+}
+
+.footer-contact .primary-cta {
+  min-height: 64px;
+  margin-top: 0;
+  padding-inline: 34px;
+  font-size: 1.12rem;
+  box-shadow: 0 24px 64px rgba(31, 112, 184, 0.34);
+}
+
+.careers h2 {
+  font-size: clamp(1.45rem, 2.5vw, 2.25rem);
+  line-height: 1.05;
 }
 
 .career-list {
   display: grid;
-  gap: 10px;
-  margin-top: 28px;
+  gap: 8px;
+  margin-top: 18px;
 }
 
 .career-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px;
+  gap: 12px;
+  padding: 12px;
   background: rgba(255, 255, 255, 0.06);
   box-shadow: none;
 }
 
 .career-row p {
   color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
 }
 
 .career-row button {
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 8px;
   color: var(--navy);
   background: white;
@@ -893,9 +918,9 @@ blockquote cite {
 
 .apply-form {
   display: grid;
-  gap: 12px;
-  margin-top: 18px;
-  padding: 18px;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 14px;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: none;
 }
