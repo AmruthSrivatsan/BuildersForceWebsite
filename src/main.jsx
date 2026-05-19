@@ -392,7 +392,7 @@ Thanks,`)}`,
   };
 
   return (
-    <footer className="footer snap-page" id="contact">
+    <footer className="footer" id="contact">
       <div className="section-inner footer-grid">
         <div className="footer-contact">
           <a className="primary-cta" href={`mailto:${contactEmail}`}>

@@ -834,12 +834,13 @@ blockquote cite {
 }
 
 .footer {
+  min-height: auto;
   background: #101f34;
   color: white;
 }
 
 .footer .section-inner {
-  padding-block: clamp(44px, 6vw, 76px);
+  padding-block: clamp(34px, 4.8vw, 58px);
 }
 
 .footer-grid {
