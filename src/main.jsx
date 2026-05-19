@@ -267,14 +267,21 @@ function Team() {
         />
         <div className="team-grid">
           {team.map((member) => (
-            <article className="team-card" key={member.name}>
+            <a
+              className="team-card"
+              href={member.link}
+              target="_blank"
+              rel="noreferrer"
+              key={member.name}
+              aria-label={`Open ${member.name}'s LinkedIn profile`}
+            >
               <img className="avatar" src={member.image} alt={`${member.name} headshot`} />
               <div>
                 <h3>{member.name}</h3>
                 <p>{member.role}</p>
-                <a href={member.link} target="_blank" rel="noreferrer">LinkedIn</a>
+                <span className="team-link">LinkedIn</span>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </div>

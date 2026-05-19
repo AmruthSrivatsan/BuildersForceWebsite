@@ -545,6 +545,7 @@ blockquote:hover,
   align-items: center;
   gap: 20px;
   padding: 24px;
+  color: inherit;
 }
 
 .avatar {
@@ -577,7 +578,7 @@ blockquote p,
   color: var(--muted);
 }
 
-.team-card a {
+.team-link {
   display: inline-block;
   margin-top: 12px;
   color: var(--purple);
