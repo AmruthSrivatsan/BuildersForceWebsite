@@ -1,5 +1,7 @@
 :root {
   color-scheme: light;
+  --font-large: "Rubik", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Manrope", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --ink: #07164c;
   --navy: #06185a;
   --blue: #1462ff;
@@ -13,9 +15,7 @@
   --line: #cad9ff;
   --muted: #354a78;
   --shadow: 0 24px 70px rgba(6, 24, 90, 0.13);
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -37,10 +37,8 @@ body {
   background:
     radial-gradient(circle at calc(16% + (var(--page-shift, 0) * 1%)) 18%, rgba(20, 98, 255, 0.11), transparent 26rem),
     radial-gradient(circle at 82% 16%, rgba(103, 50, 214, 0.12), transparent 24rem),
-    linear-gradient(90deg, rgba(20, 98, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(103, 50, 214, 0.055) 1px, transparent 1px),
     linear-gradient(180deg, #ffffff 0%, #f7faff 42%, #ffffff 100%);
-  background-size: auto, auto, 72px 72px, 72px 72px, auto;
+  background-size: auto, auto, auto;
   animation: field-drift 18s ease-in-out infinite alternate;
 }
 
@@ -75,11 +73,16 @@ p {
   margin: 0;
 }
 
+h1,
+h2,
+h3,
+.force-logo span {
+  font-family: var(--font-large);
+}
+
 @keyframes field-drift {
   from {
     background-position:
-      0 0,
-      0 0,
       0 0,
       0 0,
       0 0;
@@ -89,8 +92,6 @@ p {
     background-position:
       36px -22px,
       -28px 34px,
-      72px 0,
-      0 72px,
       0 0;
   }
 }
@@ -165,6 +166,10 @@ p {
 }
 
 .brand {
+  position: fixed;
+  top: 26px;
+  left: max(26px, calc((100vw - 1120px) / 2));
+  z-index: 30;
   display: inline-flex;
   align-items: center;
   gap: 14px;
@@ -172,20 +177,30 @@ p {
   color: var(--navy);
   font-weight: 750;
   letter-spacing: 0;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .brand-mark {
-  width: 58px;
-  height: 58px;
+  width: 145px;
+  height: 145px;
   display: block;
   object-fit: contain;
   filter: drop-shadow(0 14px 24px rgba(6, 24, 90, 0.18));
 }
 
+.brand span {
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 12px 34px rgba(6, 24, 90, 0.1);
+  backdrop-filter: blur(14px);
+}
+
 .hero-copy {
   align-self: center;
   max-width: 820px;
-  padding-block: 84px 72px;
+  padding-block: 190px 72px;
 }
 
 .eyebrow {
@@ -203,6 +218,31 @@ p {
   font-size: clamp(3.1rem, 9vw, 7.7rem);
   line-height: 0.95;
   letter-spacing: 0;
+}
+
+.floating-cta {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 40;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border-radius: 8px;
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue) 58%, var(--purple));
+  box-shadow: 0 20px 48px rgba(20, 98, 255, 0.3);
+  font-weight: 800;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.floating-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 24px 58px rgba(20, 98, 255, 0.36);
 }
 
 .hero-copy > p:not(.eyebrow) {
@@ -273,30 +313,6 @@ p {
   place-items: center;
   padding: 36px 22px;
   overflow: hidden;
-}
-
-.force-sticky::before,
-.section-band::before,
-.team-section::before,
-.proof::before,
-.services::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, transparent 0 18px, rgba(20, 98, 255, 0.15) 18px 19px, transparent 19px 100%),
-    linear-gradient(180deg, transparent 0 18px, rgba(103, 50, 214, 0.1) 18px 19px, transparent 19px 100%);
-  background-size: 96px 96px;
-  mask-image: radial-gradient(circle at center, #000 0%, rgba(0, 0, 0, 0.62) 42%, transparent 82%);
-  animation: circuit-slide 22s linear infinite;
-}
-
-@keyframes circuit-slide {
-  to {
-    background-position: 96px 48px, 48px 96px;
-  }
 }
 
 .force-orbit {
@@ -611,8 +627,6 @@ blockquote:hover,
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 34%, rgba(20, 98, 255, 0.13), transparent 28rem),
-    radial-gradient(circle at 18% 76%, rgba(103, 50, 214, 0.11), transparent 24rem),
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 250, 255, 0.96));
 }
 
@@ -673,103 +687,6 @@ blockquote p,
   color: var(--purple);
   font-size: 1.04rem;
   font-weight: 780;
-}
-
-.graph-cloud {
-  --mx: 0.5;
-  --my: 0.5;
-  position: absolute;
-  inset: 7% 5%;
-  z-index: 0;
-  opacity: 0.72;
-  pointer-events: none;
-  transform:
-    translate3d(
-      calc((var(--mx) - 0.5) * -34px),
-      calc((var(--my) - 0.5) * -28px),
-      0
-    );
-  transition: transform 120ms ease-out;
-}
-
-.graph-cloud::before,
-.graph-cloud::after {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(20, 98, 255, 0.22);
-  border-radius: 8px;
-}
-
-.graph-cloud::before {
-  inset: 7% 12% 13% 10%;
-  transform:
-    translate3d(
-      calc((var(--mx) - 0.5) * 42px),
-      calc((var(--my) - 0.5) * 32px),
-      0
-    );
-}
-
-.graph-cloud::after {
-  inset: 24% 2% 21% 18%;
-  border-color: rgba(103, 50, 214, 0.18);
-  transform:
-    translate3d(
-      calc((var(--mx) - 0.5) * -36px),
-      calc((var(--my) - 0.5) * 26px),
-      0
-    );
-}
-
-.graph-cloud svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.graph-cloud line {
-  stroke: rgba(20, 98, 255, 0.28);
-  stroke-width: 0.22;
-  vector-effect: non-scaling-stroke;
-  animation: graph-pulse 3.8s ease-in-out infinite alternate;
-}
-
-.graph-cloud line:nth-child(2n) {
-  stroke: rgba(103, 50, 214, 0.26);
-  animation-delay: -1.2s;
-}
-
-.graph-cloud span {
-  position: absolute;
-  left: var(--left);
-  top: var(--top);
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue), var(--purple));
-  box-shadow:
-    0 0 0 8px rgba(20, 98, 255, 0.08),
-    0 0 28px rgba(20, 98, 255, 0.28);
-  transform:
-    translate(-50%, -50%)
-    translate3d(
-      calc((var(--mx) - 0.5) * var(--shift) * 52px),
-      calc((var(--my) - 0.5) * var(--shift) * 44px),
-      0
-    );
-  transition: transform 120ms ease-out;
-}
-
-@keyframes graph-pulse {
-  from {
-    opacity: 0.35;
-  }
-
-  to {
-    opacity: 0.78;
-  }
 }
 
 .process-map {
@@ -1042,11 +959,7 @@ blockquote cite {
 
 .footer {
   min-height: auto;
-  background:
-    linear-gradient(90deg, rgba(122, 95, 255, 0.16) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(20, 98, 255, 0.13) 1px, transparent 1px),
-    #06185a;
-  background-size: 78px 78px, 78px 78px, auto;
+  background: #06185a;
   color: white;
 }
 
@@ -1056,19 +969,13 @@ blockquote cite {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(180px, 0.42fr) minmax(320px, 0.58fr);
+  grid-template-columns: 1fr;
   gap: clamp(28px, 5vw, 56px);
   align-items: center;
 }
 
 .footer strong {
   color: white;
-}
-
-.footer-logo {
-  width: min(260px, 100%);
-  justify-self: start;
-  filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.22));
 }
 
 .footer-contact > p {
@@ -1192,12 +1099,22 @@ blockquote cite {
   }
 
   .hero-copy {
-    padding-block: 58px 52px;
+    padding-block: 160px 52px;
+  }
+
+  .brand {
+    top: 18px;
+    left: 18px;
+    gap: 10px;
   }
 
   .brand-mark {
-    width: 48px;
-    height: 48px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .brand span {
+    display: none;
   }
 
   .force-logo {
@@ -1243,9 +1160,6 @@ blockquote cite {
     width: min(100% - 32px, 1120px);
   }
 
-  .footer-logo {
-    width: min(220px, 76vw);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

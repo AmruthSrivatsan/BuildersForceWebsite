@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import suryanHeadshot from './assets/suryan-headshot.jpeg';
 import venkatHeadshot from './assets/venkat-headshot.jpeg';
-import buildersForceLogo from './assets/builders-force-logo-transparent.png';
 import buildersForceMark from './assets/builders-force-logo-mark.png';
 
 const contactEmail = 'suryan@buildersforce.ai';
@@ -111,42 +110,6 @@ const compliance = [
   'Others on request',
 ];
 
-const graphNodes = [
-  { left: 10, top: 18, size: 10, shift: 0.9 },
-  { left: 25, top: 12, size: 7, shift: -0.6 },
-  { left: 42, top: 26, size: 12, shift: 0.4 },
-  { left: 62, top: 14, size: 8, shift: -0.9 },
-  { left: 80, top: 23, size: 11, shift: 0.7 },
-  { left: 18, top: 48, size: 8, shift: -0.7 },
-  { left: 34, top: 58, size: 13, shift: 0.8 },
-  { left: 56, top: 48, size: 9, shift: -0.4 },
-  { left: 73, top: 58, size: 12, shift: 0.5 },
-  { left: 88, top: 46, size: 7, shift: -0.8 },
-  { left: 13, top: 78, size: 12, shift: 0.6 },
-  { left: 38, top: 84, size: 8, shift: -0.6 },
-  { left: 58, top: 76, size: 11, shift: 0.9 },
-  { left: 78, top: 82, size: 8, shift: -0.5 },
-];
-
-const graphLines = [
-  { x1: 10, y1: 18, x2: 25, y2: 12 },
-  { x1: 25, y1: 12, x2: 42, y2: 26 },
-  { x1: 42, y1: 26, x2: 62, y2: 14 },
-  { x1: 62, y1: 14, x2: 80, y2: 23 },
-  { x1: 10, y1: 18, x2: 18, y2: 48 },
-  { x1: 18, y1: 48, x2: 34, y2: 58 },
-  { x1: 34, y1: 58, x2: 56, y2: 48 },
-  { x1: 56, y1: 48, x2: 73, y2: 58 },
-  { x1: 73, y1: 58, x2: 88, y2: 46 },
-  { x1: 18, y1: 48, x2: 13, y2: 78 },
-  { x1: 34, y1: 58, x2: 38, y2: 84 },
-  { x1: 56, y1: 48, x2: 58, y2: 76 },
-  { x1: 73, y1: 58, x2: 78, y2: 82 },
-  { x1: 13, y1: 78, x2: 38, y2: 84 },
-  { x1: 38, y1: 84, x2: 58, y2: 76 },
-  { x1: 58, y1: 76, x2: 78, y2: 82 },
-];
-
 function useScrollIndex(sectionRef) {
   const [active, setActive] = useState(0);
 
@@ -172,39 +135,6 @@ function useScrollIndex(sectionRef) {
   return active;
 }
 
-function GraphCloud({ position }) {
-  return (
-    <div
-      className="graph-cloud"
-      style={{ '--mx': position.x, '--my': position.y }}
-      aria-hidden="true"
-    >
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-        {graphLines.map((line, index) => (
-          <line
-            key={`${line.x1}-${line.y1}-${line.x2}-${line.y2}-${index}`}
-            x1={line.x1}
-            y1={line.y1}
-            x2={line.x2}
-            y2={line.y2}
-          />
-        ))}
-      </svg>
-      {graphNodes.map((node, index) => (
-        <span
-          key={`${node.left}-${node.top}-${index}`}
-          style={{
-            '--left': `${node.left}%`,
-            '--top': `${node.top}%`,
-            '--size': `${node.size}px`,
-            '--shift': node.shift,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 function SectionHeader({ eyebrow, title, copy }) {
   return (
     <div className="section-header">
@@ -212,6 +142,14 @@ function SectionHeader({ eyebrow, title, copy }) {
       <h2>{title}</h2>
       {copy ? <p>{copy}</p> : null}
     </div>
+  );
+}
+
+function FloatingCta() {
+  return (
+    <a className="floating-cta" href={contactHref}>
+      Build with us
+    </a>
   );
 }
 
@@ -306,24 +244,8 @@ function WhoWeAre() {
 }
 
 function Team() {
-  const [graphPosition, setGraphPosition] = useState({ x: 0.5, y: 0.5 });
-
-  const handleGraphMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    setGraphPosition({
-      x: (event.clientX - rect.left) / rect.width,
-      y: (event.clientY - rect.top) / rect.height,
-    });
-  };
-
   return (
-    <section
-      id="team"
-      className="team-section snap-page"
-      onPointerMove={handleGraphMove}
-      onPointerLeave={() => setGraphPosition({ x: 0.5, y: 0.5 })}
-    >
-      <GraphCloud position={graphPosition} />
+    <section id="team" className="team-section snap-page">
       <div className="section-inner">
         <SectionHeader
           eyebrow="Team"
@@ -452,7 +374,6 @@ function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="section-inner footer-grid">
-        <img className="footer-logo" src={buildersForceLogo} alt="Builders Force" />
         <div className="footer-contact">
           <a className="primary-cta" href={`mailto:${contactEmail}`}>
             Build with us
@@ -480,6 +401,7 @@ function App() {
 
   return (
     <>
+      <FloatingCta />
       <Hero />
       <ForceScroll />
       <main>
