@@ -75,15 +75,17 @@ const processSteps = ['Discover', 'Design', 'Build', 'Test', 'Deploy'];
 const proofItems = [
   {
     title: 'Client engagement 01',
-    eyebrow: 'Early client',
+    eyebrow: 'A Lease intelligence platform for US based Leasing company',
     copy:
-      'Mapped a manual operating workflow, identified automation opportunities, and shaped a practical AI delivery roadmap.',
+      'BuildersForce.ai has been an outstanding boutique AI and technology partner for our stealth real estate technology startup. They owned the business problem, stayed focused on outcomes, shaped website design, user flow, and AI strategy, and created real value through AI-based lease abstraction and CAM rules extraction capabilities.',
   },
   {
     title: 'Client engagement 02',
-    eyebrow: 'Early client',
+    eyebrow: 'AI based Notice Verification system - ABHAY - for Central Bureau Of Investigation, Govt of India',
     copy:
-      'Built an integrated prototype layer that helped teams move faster while keeping data ownership and controls intact.',
+      'AI-powered conversational agentic system, serving as a first line of defense to help citizens instantly verify if notices claiming to be from the CBI are genuine.',
+    link: 'https://timesofindia.indiatimes.com/city/delhi/meet-abhay-your-new-shield-against-digital-arrest/articleshow/131125102.cms',
+    linkText: 'Learn more',
   },
 ];
 
@@ -314,8 +316,8 @@ function Proof() {
       <div className="section-inner proof">
         <SectionHeader
           eyebrow="Early work"
-          title="Two client engagements, captured in one place for now."
-          copy="Until public client names and testimonials are ready, we are keeping proof focused on anonymized engagement snapshots."
+          title="Delivering measurable outcomes for real problems."
+          copy="From stealth startups to government platforms, we build solutions that matter."
         />
         <div className="proof-grid">
           {proofItems.map((item) => (
@@ -323,8 +325,17 @@ function Proof() {
               <p className="eyebrow">{item.eyebrow}</p>
               <h3>{item.title}</h3>
               <p>{item.copy}</p>
+              {item.link && (
+                <a href={item.link} target="_blank" rel="noreferrer" className="engagement-link">
+                  {item.linkText || 'Read more'}
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
             </article>
           ))}
+        </div>
+        <div className="proof-footer">
+          <p className="partnership-note">In partnership with Headrun</p>
         </div>
       </div>
     </section>
