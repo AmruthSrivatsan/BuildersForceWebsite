@@ -162,8 +162,8 @@ h3,
   width: min(1120px, 100%);
   min-height: min(calc(100svh - 56px), 100%);
   display: grid;
-  grid-template-columns: minmax(0, 0.56fr) minmax(420px, 0.44fr);
-  align-items: center;
+  grid-template-columns: 1fr;
+  align-items: start;
   gap: clamp(32px, 5vw, 72px);
   position: relative;
   z-index: 1;
@@ -175,30 +175,30 @@ h3,
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 18px;
-  width: max-content;
+  gap: 14px;
+  width: auto;
   color: var(--navy);
   font-family: 'Poppins', var(--font-large);
   font-weight: 700;
   letter-spacing: -0.02em;
-  justify-self: center;
-  grid-column: 2;
+  justify-self: start;
+  grid-column: 1;
   grid-row: 1;
 }
 
 .brand-mark {
-  width: clamp(140px, 18vw, 240px);
+  width: clamp(100px, 9vw, 140px);
   height: auto;
   display: block;
   object-fit: contain;
-  filter: drop-shadow(0 22px 40px rgba(6, 24, 90, 0.14));
+  filter: drop-shadow(0 20px 34px rgba(6, 24, 90, 0.14));
 }
 
 .brand-name {
   display: inline-flex;
   align-items: baseline;
   gap: 0.2em;
-  font-size: clamp(2rem, 2.4vw, 3.2rem);
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
   letter-spacing: -0.03em;
 }
 
@@ -1070,15 +1070,12 @@ blockquote cite {
   }
 
   .brand {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: center;
-    gap: 14px;
+    justify-self: start;
+    gap: 12px;
   }
 
   .hero-copy {
-    grid-column: 1;
-    grid-row: 2;
+    width: 100%;
   }
 
   .brand-mark {
@@ -1194,8 +1191,8 @@ blockquote cite {
     grid-column: 1;
     grid-row: 1;
     gap: 10px;
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    justify-self: start;
   }
 
   .hero-copy {
