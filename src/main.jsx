@@ -63,7 +63,7 @@ const team = [
   },
   {
     name: 'Venkat Sriraman',
-    role: 'Co-Founder, Client Success',
+    role: 'Co-Founder, Advisor',
     initials: 'VS',
     image: venkatHeadshot,
     link: 'https://www.linkedin.com/in/venkataramanan-sriraman-904603/',
