@@ -164,7 +164,7 @@ function Hero() {
           <span>buildersforce.ai</span>
         </a>
         <div className="hero-copy">
-          <p className="eyebrow">AI company for businesses that need outcomes</p>
+          <p className="eyebrow">An AI company that every outcome focused business can rely on.</p>
           <h1>AI that Builds, values that last</h1>
           <p>
             We partner with teams to discover the right problems, build intelligent
