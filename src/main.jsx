@@ -201,8 +201,8 @@ function Hero() {
           </span>
         </a>
         <div className="hero-copy">
-          <p className="eyebrow">An AI company that every outcome focused business can rely on.</p>
           <h1>AI that Builds, values that last</h1>
+          <p className="eyebrow">An AI company that every outcome focused business can rely on.</p>
           <p>
             We partner with teams to discover the right problems, build intelligent
             solutions, and deliver measurable outcomes at scale.
