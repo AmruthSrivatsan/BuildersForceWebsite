@@ -109,10 +109,11 @@ h3,
 }
 
 .hero {
-  min-height: 100svh;
+  min-height: min(100svh, 100vh);
+  max-height: 100svh;
   display: grid;
   place-items: center;
-  padding: 28px;
+  padding: clamp(20px, 4vw, 28px);
   position: relative;
   overflow: hidden;
   scroll-snap-align: start;
@@ -159,7 +160,7 @@ h3,
 
 .hero-shell {
   width: min(1120px, 100%);
-  min-height: calc(100svh - 56px);
+  min-height: min(calc(100svh - 56px), 100%);
   display: grid;
   grid-template-columns: minmax(0, 0.56fr) minmax(420px, 0.44fr);
   align-items: center;
@@ -1059,10 +1060,11 @@ blockquote cite {
 
 @media (max-width: 900px) {
   .hero {
-    padding: 24px 18px;
+    padding: 22px 16px;
   }
 
   .hero-shell {
+    min-height: min(calc(100svh - 48px), 100%);
     grid-template-columns: 1fr;
     gap: clamp(18px, 4vw, 32px);
   }
@@ -1171,20 +1173,22 @@ blockquote cite {
 @media (max-width: 700px) {
   .hero,
   .force-sticky {
-    padding: 18px 16px;
+    padding: 16px 14px;
   }
 
   .hero {
     min-height: auto;
+    height: auto;
   }
 
   .hero-shell {
     min-height: auto;
+    align-items: start;
     gap: clamp(16px, 5vw, 28px);
   }
 
   .hero-copy {
-    padding-block: 12px 42px;
+    padding-block: 10px 28px;
   }
 
   .hero h1 {
@@ -1193,6 +1197,7 @@ blockquote cite {
 
   .hero-copy > p:not(.eyebrow) {
     font-size: clamp(1rem, 3vw, 1.16rem);
+    margin-top: 18px;
   }
 
   .brand {

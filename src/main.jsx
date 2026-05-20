@@ -148,6 +148,40 @@ function SectionHeader({ eyebrow, title, copy }) {
 }
 
 function FloatingCta() {
+  const [visible, setVisible] = useState(true);
+  const heroIntersecting = useRef(false);
+  const footerIntersecting = useRef(false);
+
+  useEffect(() => {
+    const hero = document.querySelector('.hero');
+    const footer = document.querySelector('footer');
+    if (!hero || !footer || !window.IntersectionObserver) return;
+
+    const updateVisibility = () => {
+      setVisible(!(heroIntersecting.current || footerIntersecting.current));
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === hero) {
+          heroIntersecting.current = entry.isIntersecting;
+        }
+
+        if (entry.target === footer) {
+          footerIntersecting.current = entry.isIntersecting;
+        }
+      });
+      updateVisibility();
+    }, { threshold: 0.05 });
+
+    observer.observe(hero);
+    observer.observe(footer);
+
+    return () => observer.disconnect();
+  }, []);
+
+  if (!visible) return null;
+
   return (
     <a className="floating-cta" href={contactHref}>
       Build with us
