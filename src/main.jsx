@@ -161,7 +161,10 @@ function Hero() {
       <div className="hero-shell">
         <a className="brand" href="https://buildersforce.ai" aria-label="buildersforce.ai">
           <img className="brand-mark" src={buildersForceMark} alt="" />
-          <span>buildersforce.ai</span>
+          <span className="brand-name">
+            <span className="brand-builders">BUILDERS</span>
+            <span className="brand-force">FORCE</span>
+          </span>
         </a>
         <div className="hero-copy">
           <p className="eyebrow">An AI company that every outcome focused business can rely on.</p>
