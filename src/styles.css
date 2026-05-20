@@ -5,6 +5,7 @@
   --ink: #07164c;
   --navy: #06185a;
   --blue: #1462ff;
+  --force-blue: #4c7dff;
   --sky: #eaf3ff;
   --purple: #6732d6;
   --purple-soft: #efeaff;
@@ -210,7 +211,7 @@ h3,
 }
 
 .brand-force {
-  color: var(--blue);
+  color: var(--force-blue);
 }
 
 .hero-copy {
