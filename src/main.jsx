@@ -9,15 +9,6 @@ import buildersForceMark from './assets/builders-force-logo-mark.png';
 const contactEmail = 'suryan@buildersforce.ai';
 const contactHref = '#contact';
 
-const navItems = [
-  { label: 'Who we are', href: '#who-we-are' },
-  { label: 'Team', href: '#team' },
-  { label: 'How we build', href: '#process' },
-  { label: 'Early work', href: '#proof' },
-  { label: 'Services', href: '#services' },
-  { label: 'Contact', href: '#contact' },
-];
-
 const forceSections = [
   {
     key: 'builders',
@@ -224,52 +215,14 @@ function SectionHeader({ eyebrow, title, copy }) {
   );
 }
 
-function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const closeMenu = () => setMenuOpen(false);
-
-  return (
-    <>
-      <nav className="site-nav" aria-label="Primary navigation">
-        <a className="nav-brand" href="#top" onClick={closeMenu} aria-label="Builders Force home">
-          <img src={buildersForceMark} alt="" />
-          <span>buildersforce.ai</span>
-        </a>
-        <button
-          className="nav-toggle"
-          type="button"
-          aria-label="Toggle navigation menu"
-          aria-expanded={menuOpen}
-          aria-controls="site-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-        <div className={menuOpen ? 'nav-links is-open' : 'nav-links'} id="site-menu">
-          {navItems.map((item) => (
-            <a href={item.href} key={item.href} onClick={closeMenu}>
-              {item.label}
-            </a>
-          ))}
-        </div>
-        <a className="nav-cta" href={contactHref} onClick={closeMenu}>
-          Get in touch
-        </a>
-      </nav>
-      <a className="floating-cta" href={contactHref}>
-        Get in touch
-      </a>
-    </>
-  );
-}
-
 function Hero() {
   return (
-    <header className="hero" id="top">
+    <header className="hero">
       <div className="hero-shell">
+        <a className="brand" href="https://buildersforce.ai" aria-label="buildersforce.ai">
+          <img className="brand-mark" src={buildersForceMark} alt="" />
+          <span>buildersforce.ai</span>
+        </a>
         <div className="hero-copy">
           <p className="eyebrow">AI company for businesses that need outcomes</p>
           <h1>AI that Builds, values that last</h1>
@@ -281,9 +234,6 @@ function Hero() {
             Build with us
             <span aria-hidden="true">→</span>
           </a>
-        </div>
-        <div className="hero-brand-panel" aria-hidden="true">
-          <img src={buildersForceLogo} alt="" />
         </div>
       </div>
     </header>
@@ -335,8 +285,7 @@ function ForceScroll() {
 
 function WhoWeAre() {
   return (
-    <section className="who section-band snap-page" id="who-we-are">
-      <div className="section-bleed" aria-hidden="true">Ownership</div>
+    <section className="who section-band snap-page">
       <div className="section-inner split">
         <SectionHeader
           eyebrow="Who we are"
@@ -439,7 +388,7 @@ function Process() {
 
 function Proof() {
   return (
-    <section className="snap-page proof-section" id="proof">
+    <section className="snap-page">
       <div className="section-inner proof">
         <SectionHeader
           eyebrow="Early work"
@@ -462,7 +411,7 @@ function Proof() {
 
 function Services() {
   return (
-    <section className="services section-band snap-page" id="services">
+    <section className="services section-band snap-page">
       <div className="section-inner">
         <SectionHeader
           eyebrow="Services and control"
@@ -503,33 +452,13 @@ function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="section-inner footer-grid">
-        <div className="footer-brand">
-          <img className="footer-logo" src={buildersForceLogo} alt="Builders Force" />
-          <p>AI that builds. Value that lasts.</p>
-        </div>
-        <div className="footer-links">
-          <p className="eyebrow">Services</p>
-          {serviceModels.map((item) => (
-            <a href="#services" key={item.title}>
-              {item.title}
-            </a>
-          ))}
-        </div>
-        <div className="footer-links">
-          <p className="eyebrow">People</p>
-          {team.map((member) => (
-            <a href={member.link} target="_blank" rel="noreferrer" key={member.name}>
-              {member.name}
-            </a>
-          ))}
-        </div>
+        <img className="footer-logo" src={buildersForceLogo} alt="Builders Force" />
         <div className="footer-contact">
           <a className="primary-cta" href={`mailto:${contactEmail}`}>
             Build with us
             <span aria-hidden="true">→</span>
           </a>
           <p>Start a conversation about an AI solution, workflow, or operating problem.</p>
-          <a className="footer-email" href={`mailto:${contactEmail}`}>{contactEmail}</a>
         </div>
       </div>
     </footer>
@@ -551,7 +480,6 @@ function App() {
 
   return (
     <>
-      <Nav />
       <Hero />
       <ForceScroll />
       <main>
