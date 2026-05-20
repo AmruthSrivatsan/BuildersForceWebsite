@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import suryanHeadshot from './assets/suryan-headshot.jpeg';
 import venkatHeadshot from './assets/venkat-headshot.jpeg';
+import buildersForceLogo from './assets/builders-force-logo-transparent.png';
+import buildersForceMark from './assets/builders-force-logo-mark.png';
 
 const contactEmail = 'suryan@buildersforce.ai';
 const contactHref = '#contact';
@@ -109,11 +111,40 @@ const compliance = [
   'Others on request',
 ];
 
-const careers = [
-  'Builder Intern - System-centric Discoverer',
-  'Builder, Discover to Build - Customer-centric',
-  'Solver Builder, Solve to Build - Domain-centric',
-  'Maintainer Builder, Build to Maintain - DevOps-centric',
+const graphNodes = [
+  { left: 10, top: 18, size: 10, shift: 0.9 },
+  { left: 25, top: 12, size: 7, shift: -0.6 },
+  { left: 42, top: 26, size: 12, shift: 0.4 },
+  { left: 62, top: 14, size: 8, shift: -0.9 },
+  { left: 80, top: 23, size: 11, shift: 0.7 },
+  { left: 18, top: 48, size: 8, shift: -0.7 },
+  { left: 34, top: 58, size: 13, shift: 0.8 },
+  { left: 56, top: 48, size: 9, shift: -0.4 },
+  { left: 73, top: 58, size: 12, shift: 0.5 },
+  { left: 88, top: 46, size: 7, shift: -0.8 },
+  { left: 13, top: 78, size: 12, shift: 0.6 },
+  { left: 38, top: 84, size: 8, shift: -0.6 },
+  { left: 58, top: 76, size: 11, shift: 0.9 },
+  { left: 78, top: 82, size: 8, shift: -0.5 },
+];
+
+const graphLines = [
+  { x1: 10, y1: 18, x2: 25, y2: 12 },
+  { x1: 25, y1: 12, x2: 42, y2: 26 },
+  { x1: 42, y1: 26, x2: 62, y2: 14 },
+  { x1: 62, y1: 14, x2: 80, y2: 23 },
+  { x1: 10, y1: 18, x2: 18, y2: 48 },
+  { x1: 18, y1: 48, x2: 34, y2: 58 },
+  { x1: 34, y1: 58, x2: 56, y2: 48 },
+  { x1: 56, y1: 48, x2: 73, y2: 58 },
+  { x1: 73, y1: 58, x2: 88, y2: 46 },
+  { x1: 18, y1: 48, x2: 13, y2: 78 },
+  { x1: 34, y1: 58, x2: 38, y2: 84 },
+  { x1: 56, y1: 48, x2: 58, y2: 76 },
+  { x1: 73, y1: 58, x2: 78, y2: 82 },
+  { x1: 13, y1: 78, x2: 38, y2: 84 },
+  { x1: 38, y1: 84, x2: 58, y2: 76 },
+  { x1: 58, y1: 76, x2: 78, y2: 82 },
 ];
 
 function useScrollIndex(sectionRef) {
@@ -141,6 +172,39 @@ function useScrollIndex(sectionRef) {
   return active;
 }
 
+function GraphCloud({ position }) {
+  return (
+    <div
+      className="graph-cloud"
+      style={{ '--mx': position.x, '--my': position.y }}
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+        {graphLines.map((line, index) => (
+          <line
+            key={`${line.x1}-${line.y1}-${line.x2}-${line.y2}-${index}`}
+            x1={line.x1}
+            y1={line.y1}
+            x2={line.x2}
+            y2={line.y2}
+          />
+        ))}
+      </svg>
+      {graphNodes.map((node, index) => (
+        <span
+          key={`${node.left}-${node.top}-${index}`}
+          style={{
+            '--left': `${node.left}%`,
+            '--top': `${node.top}%`,
+            '--size': `${node.size}px`,
+            '--shift': node.shift,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function SectionHeader({ eyebrow, title, copy }) {
   return (
     <div className="section-header">
@@ -156,7 +220,7 @@ function Hero() {
     <header className="hero">
       <div className="hero-shell">
         <a className="brand" href="https://buildersforce.ai" aria-label="buildersforce.ai">
-          <span className="brand-mark">bf</span>
+          <img className="brand-mark" src={buildersForceMark} alt="" />
           <span>buildersforce.ai</span>
         </a>
         <div className="hero-copy">
@@ -242,8 +306,24 @@ function WhoWeAre() {
 }
 
 function Team() {
+  const [graphPosition, setGraphPosition] = useState({ x: 0.5, y: 0.5 });
+
+  const handleGraphMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setGraphPosition({
+      x: (event.clientX - rect.left) / rect.width,
+      y: (event.clientY - rect.top) / rect.height,
+    });
+  };
+
   return (
-    <section className="team-section snap-page">
+    <section
+      id="team"
+      className="team-section snap-page"
+      onPointerMove={handleGraphMove}
+      onPointerLeave={() => setGraphPosition({ x: 0.5, y: 0.5 })}
+    >
+      <GraphCloud position={graphPosition} />
       <div className="section-inner">
         <SectionHeader
           eyebrow="Team"
@@ -276,7 +356,7 @@ function Team() {
 
 function Process() {
   return (
-    <section className="process section-band snap-page">
+    <section className="process section-band snap-page" id="process">
       <div className="section-inner">
         <SectionHeader
           eyebrow="How we build"
@@ -287,7 +367,7 @@ function Process() {
           <div className="process-flow">
             {processSteps.map((step, index) => (
               <React.Fragment key={step}>
-                <article className="process-step">
+                <article className="process-step" style={{ '--step-lift': index % 2 ? '34px' : '0px' }}>
                   <div className="step-icon" aria-hidden="true">
                     {index + 1}
                   </div>
@@ -369,31 +449,10 @@ function Services() {
 }
 
 function Footer() {
-  const [selectedRole, setSelectedRole] = useState('');
-  const applicationHref = useMemo(
-    () =>
-      `mailto:${contactEmail}?subject=${encodeURIComponent(`Career interest: ${selectedRole}`)}&body=${encodeURIComponent(`Hi Builders Force,
-
-I would like to apply for: ${selectedRole}
-
-Name:
-Email:
-Portfolio / LinkedIn:
-Why this role:
-
-Thanks,`)}`,
-    [selectedRole],
-  );
-
-  const handleApplicationSubmit = (event) => {
-    event.preventDefault();
-    if (!event.currentTarget.reportValidity()) return;
-    window.location.href = applicationHref;
-  };
-
   return (
     <footer className="footer" id="contact">
       <div className="section-inner footer-grid">
+        <img className="footer-logo" src={buildersForceLogo} alt="Builders Force" />
         <div className="footer-contact">
           <a className="primary-cta" href={`mailto:${contactEmail}`}>
             Build with us
@@ -401,45 +460,24 @@ Thanks,`)}`,
           </a>
           <p>Start a conversation about an AI solution, workflow, or operating problem.</p>
         </div>
-        <div className="careers">
-          <p className="eyebrow">Careers</p>
-          <h2>Intern roles.</h2>
-          <div className="career-list">
-            {careers.map((role) => (
-              <article className="career-row" key={role}>
-                <p>{role}</p>
-                <button type="button" onClick={() => setSelectedRole(role)}>
-                  Apply
-                </button>
-              </article>
-            ))}
-          </div>
-          {selectedRole ? (
-            <form className="apply-form" onSubmit={handleApplicationSubmit}>
-              <label htmlFor="role">Application form</label>
-              <input id="role" value={selectedRole} readOnly />
-              <div className="form-row">
-                <input aria-label="Name" placeholder="Name" required />
-                <input aria-label="Email" placeholder="Email" type="email" required />
-              </div>
-              <input aria-label="Portfolio or LinkedIn" placeholder="Portfolio / LinkedIn" />
-              <label className="file-field" htmlFor="resume">
-                CV / Resume
-                <input id="resume" type="file" accept=".pdf,.doc,.docx" required />
-              </label>
-              <textarea aria-label="Why this role" placeholder="Why this role?" rows="4" required />
-              <button className="secondary-cta" type="submit">
-                Submit application
-              </button>
-            </form>
-          ) : null}
-        </div>
       </div>
     </footer>
   );
 }
 
 function App() {
+  useEffect(() => {
+    if (!window.location.hash) return;
+    const target = document.querySelector(window.location.hash);
+    const scrollToTarget = () => {
+      if (!target) return;
+      window.scrollTo({ top: target.offsetTop, behavior: 'auto' });
+    };
+    scrollToTarget();
+    const timer = window.setTimeout(scrollToTarget, 80);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Hero />

@@ -1,18 +1,18 @@
 :root {
   color-scheme: light;
-  --ink: #13243a;
-  --navy: #203f68;
-  --blue: #1f70b8;
-  --sky: #dff1ff;
-  --purple: #7057c8;
-  --purple-soft: #eee9ff;
-  --hover-purple: #f0eaff;
-  --hover-navy: #edf5ff;
+  --ink: #07164c;
+  --navy: #06185a;
+  --blue: #1462ff;
+  --sky: #eaf3ff;
+  --purple: #6732d6;
+  --purple-soft: #efeaff;
+  --hover-purple: #f3efff;
+  --hover-navy: #edf4ff;
   --paper: #ffffff;
-  --mist: #f6f9fd;
-  --line: #dbe5ef;
-  --muted: #5f7189;
-  --shadow: 0 24px 70px rgba(31, 63, 104, 0.13);
+  --mist: #f7faff;
+  --line: #cad9ff;
+  --muted: #354a78;
+  --shadow: 0 24px 70px rgba(6, 24, 90, 0.13);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -35,9 +35,13 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at 16% 12%, rgba(112, 87, 200, 0.12), transparent 28rem),
-    radial-gradient(circle at 85% 20%, rgba(31, 112, 184, 0.12), transparent 28rem),
-    linear-gradient(180deg, #ffffff 0%, #f8fbff 42%, #ffffff 100%);
+    radial-gradient(circle at calc(16% + (var(--page-shift, 0) * 1%)) 18%, rgba(20, 98, 255, 0.11), transparent 26rem),
+    radial-gradient(circle at 82% 16%, rgba(103, 50, 214, 0.12), transparent 24rem),
+    linear-gradient(90deg, rgba(20, 98, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(103, 50, 214, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, #ffffff 0%, #f7faff 42%, #ffffff 100%);
+  background-size: auto, auto, 72px 72px, 72px 72px, auto;
+  animation: field-drift 18s ease-in-out infinite alternate;
 }
 
 body,
@@ -71,6 +75,37 @@ p {
   margin: 0;
 }
 
+@keyframes field-drift {
+  from {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      36px -22px,
+      -28px 34px,
+      72px 0,
+      0 72px,
+      0 0;
+  }
+}
+
+.hero,
+.force-scroll,
+.who,
+.team-section,
+.process,
+.proof,
+.services,
+.footer {
+  isolation: isolate;
+}
+
 .hero {
   min-height: 100svh;
   display: grid;
@@ -86,23 +121,38 @@ p {
 .hero::after {
   content: "";
   position: absolute;
-  border: 1px solid rgba(32, 63, 104, 0.11);
-  border-radius: 999px;
+  border: 1px solid rgba(20, 98, 255, 0.12);
   pointer-events: none;
+  opacity: 0.9;
+  animation: scan-frame 8s ease-in-out infinite alternate;
 }
 
 .hero::before {
-  width: min(72vw, 760px);
-  aspect-ratio: 1;
-  right: -16vw;
-  top: 8vh;
+  width: min(36vw, 420px);
+  height: 46vh;
+  right: 5vw;
+  top: 14vh;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+@keyframes scan-frame {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(18px, -14px, 0);
+  }
 }
 
 .hero::after {
-  width: min(58vw, 520px);
-  aspect-ratio: 1;
-  left: -18vw;
-  bottom: -16vh;
+  width: min(38vw, 520px);
+  height: 32vh;
+  left: 4vw;
+  bottom: 10vh;
+  border-right: 0;
+  border-top: 0;
 }
 
 .hero-shell {
@@ -117,7 +167,7 @@ p {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   width: max-content;
   color: var(--navy);
   font-weight: 750;
@@ -125,16 +175,11 @@ p {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
-  color: white;
-  background: linear-gradient(135deg, var(--navy), var(--purple));
-  font-size: 0.86rem;
-  text-transform: uppercase;
-  box-shadow: 0 16px 34px rgba(32, 63, 104, 0.2);
+  width: 58px;
+  height: 58px;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 24px rgba(6, 24, 90, 0.18));
 }
 
 .hero-copy {
@@ -145,7 +190,7 @@ p {
 
 .eyebrow {
   margin-bottom: 14px;
-  color: var(--purple);
+  color: var(--blue);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -154,7 +199,7 @@ p {
 
 .hero h1 {
   max-width: 920px;
-  color: var(--ink);
+  color: var(--navy);
   font-size: clamp(3.1rem, 9vw, 7.7rem);
   line-height: 0.95;
   letter-spacing: 0;
@@ -164,7 +209,7 @@ p {
   max-width: 690px;
   margin-top: 28px;
   color: var(--muted);
-  font-size: clamp(1.05rem, 2vw, 1.28rem);
+  font-size: clamp(1.14rem, 2vw, 1.38rem);
 }
 
 .primary-cta,
@@ -188,7 +233,7 @@ p {
 .primary-cta {
   color: white;
   background: linear-gradient(135deg, var(--navy), var(--blue) 58%, var(--purple));
-  box-shadow: 0 18px 44px rgba(31, 112, 184, 0.22);
+  box-shadow: 0 18px 44px rgba(20, 98, 255, 0.24);
 }
 
 .secondary-cta {
@@ -208,8 +253,10 @@ p {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 249, 253, 0.96)),
-    linear-gradient(135deg, rgba(223, 241, 255, 0.9), rgba(238, 233, 255, 0.7));
+    radial-gradient(circle at 22% 24%, rgba(20, 98, 255, 0.14), transparent 24rem),
+    radial-gradient(circle at 76% 38%, rgba(103, 50, 214, 0.12), transparent 28rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 250, 255, 0.96)),
+    linear-gradient(135deg, rgba(234, 243, 255, 0.92), rgba(239, 234, 255, 0.72));
 }
 
 .snap-page {
@@ -226,6 +273,30 @@ p {
   place-items: center;
   padding: 36px 22px;
   overflow: hidden;
+}
+
+.force-sticky::before,
+.section-band::before,
+.team-section::before,
+.proof::before,
+.services::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 18px, rgba(20, 98, 255, 0.15) 18px 19px, transparent 19px 100%),
+    linear-gradient(180deg, transparent 0 18px, rgba(103, 50, 214, 0.1) 18px 19px, transparent 19px 100%);
+  background-size: 96px 96px;
+  mask-image: radial-gradient(circle at center, #000 0%, rgba(0, 0, 0, 0.62) 42%, transparent 82%);
+  animation: circuit-slide 22s linear infinite;
+}
+
+@keyframes circuit-slide {
+  to {
+    background-position: 96px 48px, 48px 96px;
+  }
 }
 
 .force-orbit {
@@ -271,7 +342,7 @@ p {
   justify-content: center;
   gap: clamp(8px, 1.8vw, 18px);
   width: min(1100px, 100%);
-  color: rgba(32, 63, 104, 0.35);
+  color: rgba(6, 24, 90, 0.32);
   text-transform: uppercase;
   text-align: center;
 }
@@ -294,7 +365,7 @@ p {
 }
 
 .force-logo i {
-  color: rgba(112, 87, 200, 0.42);
+  color: rgba(103, 50, 214, 0.42);
   font-style: normal;
   font-size: clamp(1rem, 2vw, 1.8rem);
 }
@@ -302,7 +373,7 @@ p {
 .force-content {
   position: relative;
   z-index: 1;
-  width: min(760px, 100%);
+  width: min(840px, 100%);
   margin-top: clamp(26px, 5vh, 62px);
   text-align: center;
   animation: content-in 520ms ease both;
@@ -316,7 +387,7 @@ p {
 }
 
 .force-content h2 {
-  font-size: clamp(1.35rem, 3vw, 2.35rem);
+  font-size: clamp(1.48rem, 3vw, 2.55rem);
   line-height: 1.15;
   letter-spacing: 0;
 }
@@ -324,16 +395,16 @@ p {
 .principle-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 28px;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .principle {
-  min-height: 86px;
+  min-height: 104px;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 18px;
+  gap: 14px;
+  padding: 22px;
   border: 1px solid rgba(32, 63, 104, 0.12);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.72);
@@ -353,6 +424,7 @@ p {
 
 .principle p {
   color: var(--navy);
+  font-size: 1.06rem;
   font-weight: 650;
 }
 
@@ -381,15 +453,24 @@ p {
 }
 
 .section-inner {
-  width: min(1120px, calc(100% - 44px));
+  width: min(1200px, calc(100% - 44px));
   margin: 0 auto;
   padding: clamp(76px, 11vw, 132px) 0;
 }
 
 .section-band {
+  position: relative;
+  overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(246, 249, 253, 0.88), rgba(255, 255, 255, 0.94)),
-    linear-gradient(135deg, rgba(223, 241, 255, 0.55), rgba(238, 233, 255, 0.44));
+    radial-gradient(circle at 20% 24%, rgba(20, 98, 255, 0.12), transparent 24rem),
+    radial-gradient(circle at 82% 62%, rgba(103, 50, 214, 0.11), transparent 26rem),
+    linear-gradient(180deg, rgba(247, 250, 255, 0.9), rgba(255, 255, 255, 0.94)),
+    linear-gradient(135deg, rgba(234, 243, 255, 0.62), rgba(239, 234, 255, 0.48));
+}
+
+.proof {
+  position: relative;
+  overflow: hidden;
 }
 
 .split {
@@ -400,11 +481,10 @@ p {
 }
 
 .section-header {
-  max-width: 720px;
+  max-width: 780px;
 }
 
-.section-header h2,
-.careers h2 {
+.section-header h2 {
   color: var(--ink);
   font-size: clamp(2rem, 4.7vw, 4.2rem);
   line-height: 1;
@@ -414,21 +494,19 @@ p {
 .section-header > p:not(.eyebrow) {
   margin-top: 18px;
   color: var(--muted);
-  font-size: 1.06rem;
+  font-size: clamp(1.12rem, 1.7vw, 1.28rem);
 }
 
 .value-stack {
   display: grid;
-  gap: 14px;
+  gap: 18px;
 }
 
 .value-card,
 .team-card,
 .case-card,
 .service-card,
-blockquote,
-.career-row,
-.apply-form {
+blockquote {
   border: 1px solid rgba(32, 63, 104, 0.13);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.78);
@@ -445,14 +523,9 @@ blockquote,
 .client-strip div,
 .compliance,
 .service-glyph,
-.career-row,
 .badge-cloud span,
-.apply-form,
 .primary-cta,
-.secondary-cta,
-.career-row button,
-.apply-form input,
-.apply-form textarea {
+.secondary-cta {
   transform-origin: center;
   transition:
     background 180ms ease,
@@ -484,12 +557,8 @@ blockquote:hover,
   background: var(--hover-navy);
 }
 
-.career-row:hover,
 .badge-cloud span:hover,
-.apply-form:hover,
-.compliance:hover,
-.apply-form input:hover,
-.apply-form textarea:hover {
+.compliance:hover {
   border-color: rgba(238, 233, 255, 0.56);
   background: rgba(240, 234, 255, 0.18);
   transform: scale(1.01);
@@ -497,24 +566,22 @@ blockquote:hover,
 
 .compliance:hover {
   background:
-    linear-gradient(135deg, rgba(32, 63, 104, 0.98), rgba(112, 87, 200, 0.9)),
+    linear-gradient(135deg, rgba(6, 24, 90, 0.98), rgba(103, 50, 214, 0.9)),
     var(--navy);
 }
 
-.career-row:hover,
 .badge-cloud span:hover,
 .compliance:hover {
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.14);
 }
 
 .primary-cta:hover,
-.secondary-cta:hover,
-.career-row button:hover {
+.secondary-cta:hover {
   transform: translateY(-2px) scale(1.015);
 }
 
 .value-card {
-  padding: 24px;
+  padding: 30px;
 }
 
 .value-card span {
@@ -524,9 +591,9 @@ blockquote:hover,
 }
 
 .value-card h3 {
-  margin-top: 14px;
+  margin-top: 16px;
   color: var(--navy);
-  font-size: clamp(1.24rem, 2.6vw, 2rem);
+  font-size: clamp(1.36rem, 2.6vw, 2.12rem);
   line-height: 1.1;
 }
 
@@ -536,8 +603,17 @@ blockquote:hover,
 .service-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 34px;
+  gap: 24px;
+  margin-top: 42px;
+}
+
+.team-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(20, 98, 255, 0.13), transparent 28rem),
+    radial-gradient(circle at 18% 76%, rgba(103, 50, 214, 0.11), transparent 24rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 250, 255, 0.96));
 }
 
 .team-section .section-header {
@@ -545,19 +621,27 @@ blockquote:hover,
   text-align: center;
 }
 
+.team-section .section-inner {
+  position: relative;
+  z-index: 1;
+}
+
 .team-card {
   display: grid;
   align-items: center;
   justify-items: center;
-  gap: 20px;
-  padding: 24px;
+  gap: 24px;
+  min-height: 360px;
+  padding: 34px 30px;
   color: inherit;
   text-align: center;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
 }
 
 .avatar {
-  width: 112px;
-  height: 112px;
+  width: 136px;
+  height: 136px;
   border-radius: 8px;
   object-fit: cover;
   object-position: center top;
@@ -569,7 +653,7 @@ blockquote:hover,
 .service-card h3,
 .compliance h3 {
   color: var(--navy);
-  font-size: 1.25rem;
+  font-size: clamp(1.34rem, 2vw, 1.56rem);
   line-height: 1.2;
 }
 
@@ -578,62 +662,181 @@ blockquote:hover,
 .service-card p,
 blockquote p,
 .compliance p,
-.footer p,
-.career-row p {
+.footer p {
   color: var(--muted);
+  font-size: 1.06rem;
 }
 
 .team-link {
   display: inline-block;
-  margin-top: 12px;
+  margin-top: 14px;
   color: var(--purple);
+  font-size: 1.04rem;
   font-weight: 780;
+}
+
+.graph-cloud {
+  --mx: 0.5;
+  --my: 0.5;
+  position: absolute;
+  inset: 7% 5%;
+  z-index: 0;
+  opacity: 0.72;
+  pointer-events: none;
+  transform:
+    translate3d(
+      calc((var(--mx) - 0.5) * -34px),
+      calc((var(--my) - 0.5) * -28px),
+      0
+    );
+  transition: transform 120ms ease-out;
+}
+
+.graph-cloud::before,
+.graph-cloud::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(20, 98, 255, 0.22);
+  border-radius: 8px;
+}
+
+.graph-cloud::before {
+  inset: 7% 12% 13% 10%;
+  transform:
+    translate3d(
+      calc((var(--mx) - 0.5) * 42px),
+      calc((var(--my) - 0.5) * 32px),
+      0
+    );
+}
+
+.graph-cloud::after {
+  inset: 24% 2% 21% 18%;
+  border-color: rgba(103, 50, 214, 0.18);
+  transform:
+    translate3d(
+      calc((var(--mx) - 0.5) * -36px),
+      calc((var(--my) - 0.5) * 26px),
+      0
+    );
+}
+
+.graph-cloud svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.graph-cloud line {
+  stroke: rgba(20, 98, 255, 0.28);
+  stroke-width: 0.22;
+  vector-effect: non-scaling-stroke;
+  animation: graph-pulse 3.8s ease-in-out infinite alternate;
+}
+
+.graph-cloud line:nth-child(2n) {
+  stroke: rgba(103, 50, 214, 0.26);
+  animation-delay: -1.2s;
+}
+
+.graph-cloud span {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  box-shadow:
+    0 0 0 8px rgba(20, 98, 255, 0.08),
+    0 0 28px rgba(20, 98, 255, 0.28);
+  transform:
+    translate(-50%, -50%)
+    translate3d(
+      calc((var(--mx) - 0.5) * var(--shift) * 52px),
+      calc((var(--my) - 0.5) * var(--shift) * 44px),
+      0
+    );
+  transition: transform 120ms ease-out;
+}
+
+@keyframes graph-pulse {
+  from {
+    opacity: 0.35;
+  }
+
+  to {
+    opacity: 0.78;
+  }
 }
 
 .process-map {
   position: relative;
-  margin-top: 42px;
-  padding-bottom: 86px;
+  margin-top: 52px;
+  padding: 30px 0 120px;
+}
+
+.process-map::before {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(20, 98, 255, 0.13), rgba(103, 50, 214, 0.18));
+  box-shadow: 0 20px 56px rgba(20, 98, 255, 0.18);
+  transform: translateY(-50%);
 }
 
 .process-flow {
-  display: flex;
-  gap: 14px;
-  align-items: center;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
 }
 
 .process-step {
-  flex: 1 1 0;
-  min-height: 168px;
+  position: relative;
+  min-height: 216px;
   display: grid;
   align-content: center;
   justify-items: center;
-  gap: 16px;
-  padding: 20px 12px;
+  gap: 18px;
+  padding: 28px 18px;
   border: 1px solid rgba(32, 63, 104, 0.13);
   border-radius: 8px;
-  background: white;
-  box-shadow: 0 18px 50px rgba(32, 63, 104, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(247, 250, 255, 0.92)),
+    white;
+  box-shadow: 0 22px 62px rgba(6, 24, 90, 0.12);
   text-align: center;
+  transform: translateY(var(--step-lift));
 }
 
 .step-icon {
-  width: 54px;
-  height: 54px;
+  width: 66px;
+  height: 66px;
   display: grid;
   place-items: center;
   border-radius: 50%;
   color: white;
   background: linear-gradient(135deg, var(--blue), var(--purple));
+  box-shadow: 0 16px 38px rgba(20, 98, 255, 0.24);
+  font-size: 1.14rem;
   font-weight: 850;
 }
 
+.process-step h3 {
+  color: var(--navy);
+  font-size: clamp(1.16rem, 1.8vw, 1.38rem);
+}
+
 .flow-arrow {
-  width: 34px;
-  height: 1px;
-  flex: 0 0 34px;
-  background: rgba(32, 63, 104, 0.34);
-  position: relative;
+  display: none;
 }
 
 .flow-arrow::after {
@@ -650,11 +853,11 @@ blockquote p,
 
 .optimize-loop {
   position: absolute;
-  right: 8%;
-  bottom: 0;
-  width: 23%;
-  min-width: 190px;
-  height: 78px;
+  right: 11%;
+  bottom: 8px;
+  width: 36%;
+  min-width: 320px;
+  height: 116px;
   text-align: center;
   pointer-events: none;
 }
@@ -663,10 +866,10 @@ blockquote p,
   content: "";
   position: absolute;
   inset: 0;
-  border-bottom: 2px solid rgba(112, 87, 200, 0.42);
-  border-left: 2px solid rgba(112, 87, 200, 0.42);
-  border-right: 2px solid rgba(112, 87, 200, 0.42);
-  border-radius: 0 0 42px 42px;
+  border-bottom: 3px solid rgba(103, 50, 214, 0.48);
+  border-left: 3px solid rgba(103, 50, 214, 0.48);
+  border-right: 3px solid rgba(20, 98, 255, 0.38);
+  border-radius: 0 0 58px 58px;
 }
 
 .optimize-loop::after {
@@ -676,8 +879,8 @@ blockquote p,
   top: -3px;
   width: 10px;
   height: 10px;
-  border-left: 2px solid rgba(112, 87, 200, 0.62);
-  border-top: 2px solid rgba(112, 87, 200, 0.62);
+  border-left: 3px solid rgba(103, 50, 214, 0.68);
+  border-top: 3px solid rgba(103, 50, 214, 0.68);
   transform: rotate(45deg);
 }
 
@@ -685,10 +888,12 @@ blockquote p,
   position: absolute;
   left: 50%;
   bottom: 16px;
-  padding: 4px 10px;
+  padding: 8px 14px;
   color: var(--purple);
-  background: rgba(250, 248, 255, 0.96);
-  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(103, 50, 214, 0.22);
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(6, 24, 90, 0.1);
   font-weight: 850;
   transform: translateX(-50%);
   white-space: nowrap;
@@ -697,7 +902,7 @@ blockquote p,
 .case-card,
 .service-card,
 blockquote {
-  padding: 26px;
+  padding: 32px;
 }
 
 .client-strip {
@@ -756,9 +961,9 @@ blockquote cite {
 
 .service-glyph {
   display: block;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 22px;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 26px;
   border-radius: 8px;
   background:
     linear-gradient(135deg, rgba(31, 112, 184, 0.2), rgba(112, 87, 200, 0.28)),
@@ -791,7 +996,8 @@ blockquote cite {
 
 .service-card p,
 .case-card p {
-  margin-top: 14px;
+  margin-top: 16px;
+  font-size: 1.06rem;
 }
 
 .compliance {
@@ -799,8 +1005,8 @@ blockquote cite {
   grid-template-columns: minmax(260px, 0.72fr) 1fr;
   gap: 28px;
   align-items: center;
-  margin-top: 16px;
-  padding: 28px;
+  margin-top: 24px;
+  padding: 34px;
   border-radius: 8px;
   background: var(--navy);
   box-shadow: var(--shadow);
@@ -815,6 +1021,7 @@ blockquote cite {
 .compliance p:not(.eyebrow) {
   margin-top: 12px;
   color: rgba(255, 255, 255, 0.78);
+  font-size: 1.05rem;
 }
 
 .badge-cloud {
@@ -824,18 +1031,22 @@ blockquote cite {
 }
 
 .badge-cloud span {
-  padding: 9px 12px;
+  padding: 11px 14px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   color: white;
   background: rgba(255, 255, 255, 0.08);
-  font-size: 0.9rem;
+  font-size: 0.98rem;
   font-weight: 760;
 }
 
 .footer {
   min-height: auto;
-  background: #101f34;
+  background:
+    linear-gradient(90deg, rgba(122, 95, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(20, 98, 255, 0.13) 1px, transparent 1px),
+    #06185a;
+  background-size: 78px 78px, 78px 78px, auto;
   color: white;
 }
 
@@ -845,15 +1056,19 @@ blockquote cite {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(340px, 0.85fr);
+  grid-template-columns: minmax(180px, 0.42fr) minmax(320px, 0.58fr);
   gap: clamp(28px, 5vw, 56px);
   align-items: center;
 }
 
-.footer .eyebrow,
-.footer h2,
 .footer strong {
   color: white;
+}
+
+.footer-logo {
+  width: min(260px, 100%);
+  justify-self: start;
+  filter: drop-shadow(0 22px 48px rgba(0, 0, 0, 0.22));
 }
 
 .footer-contact > p {
@@ -867,10 +1082,10 @@ blockquote cite {
   display: grid;
   justify-items: start;
   padding: clamp(24px, 4vw, 38px);
-  border: 1px solid rgba(238, 233, 255, 0.18);
+  border: 1px solid rgba(234, 243, 255, 0.22);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(31, 112, 184, 0.24), rgba(112, 87, 200, 0.2)),
+    linear-gradient(135deg, rgba(20, 98, 255, 0.28), rgba(103, 50, 214, 0.24)),
     rgba(255, 255, 255, 0.06);
 }
 
@@ -880,91 +1095,6 @@ blockquote cite {
   padding-inline: 34px;
   font-size: 1.12rem;
   box-shadow: 0 24px 64px rgba(31, 112, 184, 0.34);
-}
-
-.careers h2 {
-  font-size: clamp(1.45rem, 2.5vw, 2.25rem);
-  line-height: 1.05;
-}
-
-.career-list {
-  display: grid;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.career-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: none;
-}
-
-.career-row p {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.95rem;
-}
-
-.career-row button {
-  min-height: 34px;
-  padding: 0 12px;
-  border-radius: 8px;
-  color: var(--navy);
-  background: white;
-  font-weight: 780;
-}
-
-.apply-form {
-  display: grid;
-  gap: 10px;
-  margin-top: 14px;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: none;
-}
-
-.apply-form label {
-  color: white;
-  font-weight: 800;
-}
-
-.apply-form input,
-.apply-form textarea,
-.apply-form button {
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 8px;
-  padding: 12px 13px;
-  color: white;
-  background: rgba(255, 255, 255, 0.08);
-  outline: none;
-}
-
-.file-field {
-  display: grid;
-  gap: 8px;
-}
-
-.file-field input {
-  cursor: pointer;
-}
-
-.apply-form .secondary-cta {
-  margin-top: 0;
-}
-
-.apply-form input::placeholder,
-.apply-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
 }
 
 @media (max-width: 900px) {
@@ -979,16 +1109,27 @@ blockquote cite {
   }
 
   .process-map {
-    padding-bottom: 0;
+    padding: 20px 0 0;
+  }
+
+  .process-map::before {
+    left: 50%;
+    right: auto;
+    top: 24px;
+    bottom: 70px;
+    width: 12px;
+    height: auto;
+    transform: translateX(-50%);
   }
 
   .process-flow {
     align-items: stretch;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .process-step {
-    min-height: 126px;
+    min-height: 148px;
+    transform: none;
   }
 
   .flow-arrow {
@@ -1055,8 +1196,8 @@ blockquote cite {
   }
 
   .brand-mark {
-    width: 38px;
-    height: 38px;
+    width: 48px;
+    height: 48px;
   }
 
   .force-logo {
@@ -1081,8 +1222,7 @@ blockquote cite {
   .team-grid,
   .proof-grid,
   .testimonial-grid,
-  .client-strip,
-  .form-row {
+  .client-strip {
     grid-template-columns: 1fr;
   }
 
@@ -1103,13 +1243,8 @@ blockquote cite {
     width: min(100% - 32px, 1120px);
   }
 
-  .career-row {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .career-row button {
-    width: 100%;
+  .footer-logo {
+    width: min(220px, 76vw);
   }
 }
 
