@@ -75,7 +75,7 @@ const processSteps = ['Discover', 'Design', 'Build', 'Test', 'Deploy'];
 const proofItems = [
   {
     title: 'Client engagement 01',
-    eyebrow: 'A Lease intelligence platform for US based Leasing company',
+    eyebrow: 'Lease intelligence platform for US based Leasing company',
     copy:
       'BuildersForce.ai has been an outstanding boutique AI and technology partner for our stealth real estate technology startup. They owned the business problem, stayed focused on outcomes, shaped website design, user flow, and AI strategy, and created real value through AI-based lease abstraction and CAM rules extraction capabilities.',
   },
@@ -326,7 +326,6 @@ function Proof() {
           {proofItems.map((item) => (
             <article className="case-card" key={item.title}>
               <p className="eyebrow">{item.eyebrow}</p>
-              <h3>{item.title}</h3>
               <p>{item.copy}</p>
               {item.link && (
                 <a href={item.link} target="_blank" rel="noreferrer" className="engagement-link">
@@ -336,9 +335,6 @@ function Proof() {
               )}
             </article>
           ))}
-        </div>
-        <div className="proof-footer">
-          <p className="partnership-note">In partnership with Headrun</p>
         </div>
       </div>
     </section>
