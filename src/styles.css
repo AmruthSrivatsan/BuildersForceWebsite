@@ -1233,6 +1233,15 @@ blockquote cite {
     letter-spacing: 0.035em;
   }
 
+  .case-card > .eyebrow {
+    color: var(--blue);
+    font-size: 0.7rem;
+    font-weight: 800;
+    line-height: 1.5;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
   .eyebrow {
     font-size: 0.7rem;
     margin-top: 18px;
