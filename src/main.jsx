@@ -8,6 +8,12 @@ import buildersForceMark from './assets/builders-force-logo-mark.png';
 const contactEmail = 'suryan@buildersforce.ai';
 const contactHref = '#contact';
 
+function scrollToFooterContact() {
+  const target = document.querySelector('.footer-contact .primary-cta');
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 const forceSections = [
   {
     key: 'builders',
@@ -151,14 +157,17 @@ function FloatingCta() {
   const [visible, setVisible] = useState(true);
   const heroIntersecting = useRef(false);
   const footerIntersecting = useRef(false);
+  const isPhone = useRef(false);
 
   useEffect(() => {
     const hero = document.querySelector('.hero');
     const footer = document.querySelector('footer');
     if (!hero || !footer || !window.IntersectionObserver) return;
+    const phoneQuery = window.matchMedia('(max-width: 700px)');
 
     const updateVisibility = () => {
-      setVisible(!(heroIntersecting.current || footerIntersecting.current));
+      isPhone.current = phoneQuery.matches;
+      setVisible(!(footerIntersecting.current || (!isPhone.current && heroIntersecting.current)));
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -176,14 +185,23 @@ function FloatingCta() {
 
     observer.observe(hero);
     observer.observe(footer);
+    updateVisibility();
 
-    return () => observer.disconnect();
+    phoneQuery.addEventListener('change', updateVisibility);
+
+    return () => {
+      observer.disconnect();
+      phoneQuery.removeEventListener('change', updateVisibility);
+    };
   }, []);
 
   if (!visible) return null;
 
   return (
-    <a className="floating-cta" href={contactHref}>
+    <a className="floating-cta" href={contactHref} onClick={(event) => {
+      event.preventDefault();
+      scrollToFooterContact();
+    }}>
       Build with us
     </a>
   );
@@ -201,13 +219,16 @@ function Hero() {
           </span>
         </a>
         <div className="hero-copy">
-          <h1>AI that Builds, values that last</h1>
+          <h1>AI that Builds, Values that Last</h1>
           <p className="eyebrow">An AI company that every outcome focused business can rely on.</p>
           <p>
             We partner with teams to discover the right problems, build intelligent
             solutions, and deliver measurable outcomes at scale.
           </p>
-          <a className="primary-cta" href={contactHref}>
+          <a className="primary-cta" href={contactHref} onClick={(event) => {
+            event.preventDefault();
+            scrollToFooterContact();
+          }}>
             Build with us
             <span aria-hidden="true">→</span>
           </a>
@@ -432,7 +453,27 @@ function Footer() {
 
 function App() {
   useEffect(() => {
-    if (!window.location.hash) return;
+    const hasScrollRestoration = 'scrollRestoration' in window.history;
+    const previousScrollRestoration = hasScrollRestoration
+      ? window.history.scrollRestoration
+      : undefined;
+
+    if (hasScrollRestoration) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    if (!window.location.hash) {
+      const scrollToTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      scrollToTop();
+      const timer = window.setTimeout(scrollToTop, 80);
+      return () => {
+        window.clearTimeout(timer);
+        if (hasScrollRestoration) {
+          window.history.scrollRestoration = previousScrollRestoration;
+        }
+      };
+    }
+
     const target = document.querySelector(window.location.hash);
     const scrollToTarget = () => {
       if (!target) return;
@@ -440,7 +481,12 @@ function App() {
     };
     scrollToTarget();
     const timer = window.setTimeout(scrollToTarget, 80);
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(timer);
+      if (hasScrollRestoration) {
+        window.history.scrollRestoration = previousScrollRestoration;
+      }
+    };
   }, []);
 
   return (
