@@ -176,7 +176,7 @@ h3,
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 14px;
+  gap: 18px;
   width: auto;
   color: var(--navy);
   font-family: var(--font-large);
@@ -188,7 +188,7 @@ h3,
 }
 
 .brand-mark {
-  width: clamp(100px, 9vw, 140px);
+  width: clamp(130px, 11.7vw, 182px);
   height: auto;
   display: block;
   object-fit: contain;
@@ -200,7 +200,7 @@ h3,
   display: inline-flex;
   align-items: baseline;
   gap: 0.2em;
-  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  font-size: clamp(1.82rem, 2.6vw, 2.86rem);
   letter-spacing: -0.03em;
 }
 
