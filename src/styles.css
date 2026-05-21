@@ -164,7 +164,8 @@ h3,
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
-  gap: clamp(32px, 5vw, 72px);
+  align-content: start;
+  gap: clamp(18px, 4vh, 42px);
   position: relative;
   z-index: 1;
 }
@@ -181,7 +182,7 @@ h3,
   font-family: var(--font-large);
   font-weight: 700;
   letter-spacing: -0.02em;
-  justify-self: start;
+  justify-self: center;
   grid-column: 1;
   grid-row: 1;
 }
@@ -217,13 +218,13 @@ h3,
 }
 
 .hero-copy {
-  align-self: center;
+  align-self: start;
   max-width: 1080px;
   grid-column: 1;
   grid-row: 2;
-  padding-block: clamp(72px, 9vh, 108px) 56px;
-  justify-self: start;
-  text-align: left;
+  padding-block: clamp(36px, 5vh, 72px) 72px;
+  justify-self: center;
+  text-align: center;
 }
 
 .eyebrow {
@@ -238,10 +239,20 @@ h3,
 
 .hero h1 {
   max-width: 1080px;
+  margin-inline: auto;
   color: var(--navy);
   font-size: clamp(3.6rem, 7.6vw, 6.9rem);
   line-height: 0.96;
   letter-spacing: 0;
+}
+
+.hero-copy .eyebrow {
+  max-width: 1120px;
+  margin: 30px auto 0;
+  color: var(--blue);
+  font-size: clamp(1.85rem, 3vw, 3.08rem);
+  line-height: 1.08;
+  letter-spacing: 0.035em;
 }
 
 .floating-cta {
@@ -273,7 +284,7 @@ h3,
 
 .hero-copy > p:not(.eyebrow) {
   max-width: 690px;
-  margin-top: 28px;
+  margin: 28px auto 0;
   color: var(--muted);
   font-size: clamp(1.14rem, 2vw, 1.38rem);
 }
@@ -294,6 +305,10 @@ h3,
     transform 180ms ease,
     box-shadow 180ms ease,
     background 180ms ease;
+}
+
+.hero .primary-cta {
+  display: none;
 }
 
 .primary-cta {
@@ -671,6 +686,15 @@ blockquote:hover,
   font-size: 1.04rem;
   text-decoration: none;
   transition: all 180ms ease;
+}
+
+.case-card > .eyebrow {
+  color: var(--force-blue);
+  font-size: clamp(1.12rem, 1.6vw, 1.4rem);
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .engagement-link:hover {
@@ -1072,11 +1096,11 @@ blockquote cite {
   .hero-shell {
     min-height: min(calc(100svh - 48px), 100%);
     grid-template-columns: 1fr;
-    gap: clamp(18px, 4vw, 32px);
+    gap: clamp(16px, 4vh, 32px);
   }
 
   .brand {
-    justify-self: start;
+    justify-self: center;
     gap: 12px;
   }
 
@@ -1085,7 +1109,7 @@ blockquote cite {
   }
 
   .brand-mark {
-    width: min(340px, 78vw);
+    width: clamp(108px, 18vw, 160px);
     height: auto;
   }
 
@@ -1161,7 +1185,7 @@ blockquote cite {
     min-height: calc(100svh - 32px);
     grid-template-columns: 1fr;
     align-items: start;
-    gap: clamp(34px, 8vh, 72px);
+    gap: clamp(18px, 4vh, 34px);
   }
 
   .brand {
@@ -1169,7 +1193,7 @@ blockquote cite {
     grid-row: 1;
     gap: 8px;
     width: min(100%, 360px);
-    justify-self: start;
+    justify-self: center;
     min-width: 0;
   }
 
@@ -1177,7 +1201,7 @@ blockquote cite {
     grid-column: 1;
     grid-row: 2;
     width: 100%;
-    padding-block: clamp(36px, 10vh, 92px) 88px;
+    padding-block: clamp(20px, 4vh, 42px) 88px;
   }
 
   .brand-name {
@@ -1199,8 +1223,14 @@ blockquote cite {
 
   .hero-copy > p:not(.eyebrow) {
     font-size: clamp(0.95rem, 2.8vw, 1.08rem);
-    margin-top: 16px;
+    margin: 16px auto 0;
     line-height: 1.4;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: clamp(1.12rem, 5vw, 1.55rem);
+    line-height: 1.12;
+    letter-spacing: 0.035em;
   }
 
   .eyebrow {

@@ -155,27 +155,18 @@ function SectionHeader({ eyebrow, title, copy }) {
 
 function FloatingCta() {
   const [visible, setVisible] = useState(true);
-  const heroIntersecting = useRef(false);
   const footerIntersecting = useRef(false);
-  const isPhone = useRef(false);
 
   useEffect(() => {
-    const hero = document.querySelector('.hero');
     const footer = document.querySelector('footer');
-    if (!hero || !footer || !window.IntersectionObserver) return;
-    const phoneQuery = window.matchMedia('(max-width: 700px)');
+    if (!footer || !window.IntersectionObserver) return;
 
     const updateVisibility = () => {
-      isPhone.current = phoneQuery.matches;
-      setVisible(!(footerIntersecting.current || (!isPhone.current && heroIntersecting.current)));
+      setVisible(!footerIntersecting.current);
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.target === hero) {
-          heroIntersecting.current = entry.isIntersecting;
-        }
-
         if (entry.target === footer) {
           footerIntersecting.current = entry.isIntersecting;
         }
@@ -183,15 +174,11 @@ function FloatingCta() {
       updateVisibility();
     }, { threshold: 0.05 });
 
-    observer.observe(hero);
     observer.observe(footer);
     updateVisibility();
 
-    phoneQuery.addEventListener('change', updateVisibility);
-
     return () => {
       observer.disconnect();
-      phoneQuery.removeEventListener('change', updateVisibility);
     };
   }, []);
 
@@ -370,7 +357,7 @@ function Process() {
 
 function Proof() {
   return (
-    <section className="snap-page">
+    <section className="snap-page" id="proof">
       <div className="section-inner proof">
         <SectionHeader
           eyebrow="Early work"
