@@ -5,7 +5,14 @@ import suryanHeadshot from './assets/suryan-headshot.jpeg';
 import venkatHeadshot from './assets/venkat-headshot.jpeg';
 import buildersForceMark from './assets/builders-force-logo-mark.png';
 
-const contactFormEndpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT?.trim() || '';
+const contactEmail = 'suryan@buildersforce.ai';
+const contactHref = '#contact';
+
+function scrollToFooterContact() {
+  const target = document.querySelector('.footer-contact .primary-cta');
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
 const forceSections = [
   {
@@ -146,7 +153,7 @@ function SectionHeader({ eyebrow, title, copy }) {
   );
 }
 
-function FloatingCta({ onOpenContact }) {
+function FloatingCta() {
   const [visible, setVisible] = useState(true);
   const footerIntersecting = useRef(false);
 
@@ -178,13 +185,16 @@ function FloatingCta({ onOpenContact }) {
   if (!visible) return null;
 
   return (
-    <button className="floating-cta" type="button" onClick={onOpenContact}>
+    <a className="floating-cta" href={contactHref} onClick={(event) => {
+      event.preventDefault();
+      scrollToFooterContact();
+    }}>
       Build with us
-    </button>
+    </a>
   );
 }
 
-function Hero({ onOpenContact }) {
+function Hero() {
   return (
     <header className="hero">
       <div className="hero-shell">
@@ -202,185 +212,16 @@ function Hero({ onOpenContact }) {
             We partner with teams to discover the right problems, build intelligent
             solutions, and deliver measurable outcomes at scale.
           </p>
-          <button className="primary-cta" type="button" onClick={onOpenContact}>
+          <a className="primary-cta" href={contactHref} onClick={(event) => {
+            event.preventDefault();
+            scrollToFooterContact();
+          }}>
             Build with us
             <span aria-hidden="true">→</span>
-          </button>
+          </a>
         </div>
       </div>
     </header>
-  );
-}
-
-function ContactModal({ isOpen, onClose }) {
-  const initialForm = {
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  };
-  const [form, setForm] = useState(initialForm);
-  const [status, setStatus] = useState('idle');
-  const [notice, setNotice] = useState('');
-  const hasEndpoint = Boolean(contactFormEndpoint);
-
-  useEffect(() => {
-    if (!isOpen) return undefined;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    setStatus('idle');
-    setNotice('');
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((current) => ({ ...current, [name]: value }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!hasEndpoint) {
-      setStatus('error');
-      setNotice('Contact form is temporarily unavailable.');
-      return;
-    }
-
-    setStatus('sending');
-    setNotice('');
-
-    const payload = {
-      ...form,
-      _subject: `Builders Force website inquiry: ${form.subject}`,
-    };
-
-    try {
-      const response = await fetch(contactFormEndpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error('Form submission failed');
-      }
-
-      setForm(initialForm);
-      setStatus('success');
-      setNotice('Thank you. Your message has been sent.');
-    } catch (error) {
-      setStatus('error');
-      setNotice('Something went wrong while sending. Please try again.');
-    }
-  };
-
-  return (
-    <div className="modal-layer" role="presentation" onMouseDown={onClose}>
-      <section
-        className="contact-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="contact-modal-title"
-        onMouseDown={(event) => event.stopPropagation()}
-      >
-        <button className="modal-close" type="button" aria-label="Close contact form" onClick={onClose}>
-          ×
-        </button>
-        <div className="modal-heading">
-          <p className="eyebrow">Build with us</p>
-          <h2 id="contact-modal-title">Tell us what you want to build.</h2>
-          <p>Share the problem, workflow, or AI opportunity you want to move forward.</p>
-        </div>
-        {!hasEndpoint ? (
-          <p className="form-status is-error">Contact form is temporarily unavailable.</p>
-        ) : null}
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <label>
-            <span>Name</span>
-            <input
-              name="name"
-              type="text"
-              autoComplete="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            <span>Email</span>
-            <input
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            <span>Phone number</span>
-            <input
-              name="phone"
-              type="tel"
-              autoComplete="tel"
-              value={form.phone}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            <span>Subject</span>
-            <input
-              name="subject"
-              type="text"
-              value={form.subject}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label className="form-message">
-            <span>Message</span>
-            <textarea
-              name="message"
-              rows="5"
-              value={form.message}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          {notice ? (
-            <p className={`form-status ${status === 'success' ? 'is-success' : 'is-error'}`}>{notice}</p>
-          ) : null}
-          <button className="primary-cta form-submit" type="submit" disabled={!hasEndpoint || status === 'sending'}>
-            {status === 'sending' ? 'Sending...' : 'Send message'}
-            <span aria-hidden="true">→</span>
-          </button>
-        </form>
-      </section>
-    </div>
   );
 }
 
@@ -581,15 +422,15 @@ function Services() {
   );
 }
 
-function Footer({ onOpenContact }) {
+function Footer() {
   return (
     <footer className="footer" id="contact">
       <div className="section-inner footer-grid">
         <div className="footer-contact">
-          <button className="primary-cta" type="button" onClick={onOpenContact}>
+          <a className="primary-cta" href={`mailto:${contactEmail}`}>
             Build with us
             <span aria-hidden="true">→</span>
-          </button>
+          </a>
           <p>Start a conversation about an AI solution, workflow, or operating problem.</p>
         </div>
       </div>
@@ -598,8 +439,6 @@ function Footer({ onOpenContact }) {
 }
 
 function App() {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-
   useEffect(() => {
     const hasScrollRestoration = 'scrollRestoration' in window.history;
     const previousScrollRestoration = hasScrollRestoration
@@ -639,8 +478,8 @@ function App() {
 
   return (
     <>
-      <FloatingCta onOpenContact={() => setIsContactOpen(true)} />
-      <Hero onOpenContact={() => setIsContactOpen(true)} />
+      <FloatingCta />
+      <Hero />
       <ForceScroll />
       <main>
         <WhoWeAre />
@@ -649,8 +488,7 @@ function App() {
         <Proof />
         <Services />
       </main>
-      <Footer onOpenContact={() => setIsContactOpen(true)} />
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      <Footer />
     </>
   );
 }
