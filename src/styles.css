@@ -119,42 +119,16 @@ h3,
   scroll-snap-stop: normal;
 }
 
-.hero::before,
-.hero::after {
-  content: "";
+.thinking-field {
   position: absolute;
-  border: 1px solid rgba(20, 98, 255, 0.12);
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  opacity: 0.9;
-  animation: scan-frame 8s ease-in-out infinite alternate;
-}
-
-.hero::before {
-  width: min(36vw, 420px);
-  height: 46vh;
-  right: 5vw;
-  top: 14vh;
-  border-left: 0;
-  border-bottom: 0;
-}
-
-@keyframes scan-frame {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(18px, -14px, 0);
-  }
-}
-
-.hero::after {
-  width: min(38vw, 520px);
-  height: 32vh;
-  left: 4vw;
-  bottom: 10vh;
-  border-right: 0;
-  border-top: 0;
+  opacity: 0.78;
+  -webkit-mask-image: radial-gradient(ellipse 76% 72% at 50% 57%, #000 24%, rgba(0, 0, 0, 0.9) 54%, transparent 88%);
+  mask-image: radial-gradient(ellipse 76% 72% at 50% 57%, #000 24%, rgba(0, 0, 0, 0.9) 54%, transparent 88%);
 }
 
 .hero-shell {
@@ -1305,9 +1279,10 @@ blockquote cite {
     transform: translateY(-2px) scale(1.02);
   }
 
-  .hero::before,
-  .hero::after {
-    display: none;
+  .thinking-field {
+    opacity: 0.68;
+    -webkit-mask-image: radial-gradient(ellipse 94% 68% at 50% 57%, #000 20%, rgba(0, 0, 0, 0.86) 56%, transparent 92%);
+    mask-image: radial-gradient(ellipse 94% 68% at 50% 57%, #000 20%, rgba(0, 0, 0, 0.86) 56%, transparent 92%);
   }
 
   .force-logo {

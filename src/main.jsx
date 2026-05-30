@@ -194,9 +194,225 @@ function FloatingCta() {
   );
 }
 
+const thinkingFieldFrameInterval = 1000 / 30;
+const thinkingFieldStaticTime = 3200;
+
+function ThinkingField() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const hero = canvas?.parentElement;
+    const context = canvas?.getContext('2d');
+
+    if (!canvas || !hero || !context) return undefined;
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const initialRect = hero.getBoundingClientRect();
+    let width = 0;
+    let height = 0;
+    let pixelRatio = 1;
+    let animationFrame = null;
+    let resizeFrame = null;
+    let lastDrawnAt = 0;
+    let isHeroVisible = initialRect.bottom > 0 && initialRect.top < window.innerHeight;
+
+    const draw = (timestamp) => {
+      if (!width || !height) return;
+
+      const seconds = timestamp / 1000;
+      const isCompact = width < 700;
+      const ringCount = isCompact ? 28 : 38;
+      const maxRadius = Math.min(
+        width * (isCompact ? 0.73 : 0.39),
+        height * (isCompact ? 0.34 : 0.43),
+      );
+      const minRadius = Math.max(24, maxRadius * 0.17);
+      const centerX = width * 0.5 + Math.sin(seconds * 0.19) * maxRadius * 0.018;
+      const centerY = height * (isCompact ? 0.56 : 0.57)
+        + Math.cos(seconds * 0.16) * maxRadius * 0.014;
+      const colors = [
+        [6, 24, 90],
+        [20, 98, 255],
+        [103, 50, 214],
+      ];
+
+      context.clearRect(0, 0, width, height);
+      context.save();
+
+      for (let ringIndex = 0; ringIndex < ringCount; ringIndex += 1) {
+        const ringProgress = ringIndex / (ringCount - 1);
+        const radius = minRadius + (maxRadius - minRadius) * ringProgress;
+        const pointCount = Math.max(
+          40,
+          Math.round((Math.PI * 2 * radius) / (isCompact ? 9.5 : 10.5)),
+        );
+        const ringPhase = ringIndex * 0.31;
+        const [red, green, blue] = colors[ringIndex % colors.length];
+        const opacity = 0.1 + Math.sin(ringProgress * Math.PI) * 0.095;
+        const xScale = 1 + Math.sin(seconds * 0.13 + ringIndex * 0.11) * 0.035;
+        const yScale = 0.87 + Math.cos(seconds * 0.11 - ringIndex * 0.09) * 0.025;
+
+        context.beginPath();
+        context.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+
+        for (let pointIndex = 0; pointIndex < pointCount; pointIndex += 1) {
+          const angle = (pointIndex / pointCount) * Math.PI * 2
+            + ringIndex * 0.027
+            + seconds * (0.025 + ringProgress * 0.012);
+          const radialShift = Math.sin(angle * 3 + seconds * 0.52 + ringPhase) * radius * 0.028
+            + Math.sin(angle * 5 - seconds * 0.34 + ringPhase * 0.72) * radius * 0.016
+            + Math.sin(angle * 2 + seconds * 0.21 - ringPhase * 0.46) * radius * 0.018
+            + Math.sin(seconds * 0.7 + ringPhase) * maxRadius * 0.008;
+          const pointRadius = (isCompact ? 0.7 : 0.82)
+            + ((Math.sin(angle * 4 - seconds * 0.48 + ringPhase) + 1) * 0.16)
+            + ringProgress * 0.12;
+          const x = centerX + Math.cos(angle) * (radius + radialShift) * xScale;
+          const y = centerY + Math.sin(angle) * (radius + radialShift) * yScale;
+
+          context.moveTo(x + pointRadius, y);
+          context.arc(x, y, pointRadius, 0, Math.PI * 2);
+        }
+
+        context.fill();
+      }
+
+      context.restore();
+    };
+
+    const shouldAnimate = () => (
+      isHeroVisible
+      && !document.hidden
+      && !motionQuery.matches
+    );
+
+    const stopAnimation = () => {
+      if (animationFrame === null) return;
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    };
+
+    const tick = (timestamp) => {
+      animationFrame = null;
+      if (!shouldAnimate()) return;
+
+      if (!lastDrawnAt || timestamp - lastDrawnAt >= thinkingFieldFrameInterval) {
+        draw(timestamp);
+        lastDrawnAt = timestamp;
+      }
+
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    const startAnimation = () => {
+      if (!shouldAnimate() || animationFrame !== null) return;
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    const renderCurrentFrame = () => {
+      draw(motionQuery.matches ? thinkingFieldStaticTime : performance.now());
+    };
+
+    const syncSize = () => {
+      const rect = hero.getBoundingClientRect();
+      const nextWidth = Math.max(1, Math.round(rect.width));
+      const nextHeight = Math.max(1, Math.round(rect.height));
+      const nextPixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+      if (
+        nextWidth === width
+        && nextHeight === height
+        && nextPixelRatio === pixelRatio
+      ) {
+        return;
+      }
+
+      width = nextWidth;
+      height = nextHeight;
+      pixelRatio = nextPixelRatio;
+      canvas.width = Math.round(width * pixelRatio);
+      canvas.height = Math.round(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      renderCurrentFrame();
+    };
+
+    const scheduleResize = () => {
+      if (resizeFrame !== null) return;
+      resizeFrame = window.requestAnimationFrame(() => {
+        resizeFrame = null;
+        syncSize();
+      });
+    };
+
+    const updateAnimationState = () => {
+      if (shouldAnimate()) {
+        startAnimation();
+      } else {
+        stopAnimation();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (!document.hidden) renderCurrentFrame();
+      updateAnimationState();
+    };
+
+    const handleMotionPreferenceChange = () => {
+      stopAnimation();
+      lastDrawnAt = 0;
+      renderCurrentFrame();
+      updateAnimationState();
+    };
+
+    const intersectionObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver(([entry]) => {
+        isHeroVisible = entry.isIntersecting;
+        if (isHeroVisible) renderCurrentFrame();
+        updateAnimationState();
+      }, { threshold: 0 })
+      : null;
+
+    const resizeObserver = 'ResizeObserver' in window
+      ? new ResizeObserver(scheduleResize)
+      : null;
+
+    syncSize();
+    intersectionObserver?.observe(hero);
+    resizeObserver?.observe(hero);
+    window.addEventListener('resize', scheduleResize);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener('change', handleMotionPreferenceChange);
+    } else {
+      motionQuery.addListener(handleMotionPreferenceChange);
+    }
+
+    updateAnimationState();
+
+    return () => {
+      stopAnimation();
+      if (resizeFrame !== null) window.cancelAnimationFrame(resizeFrame);
+      intersectionObserver?.disconnect();
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', scheduleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+
+      if (motionQuery.removeEventListener) {
+        motionQuery.removeEventListener('change', handleMotionPreferenceChange);
+      } else {
+        motionQuery.removeListener(handleMotionPreferenceChange);
+      }
+    };
+  }, []);
+
+  return <canvas className="thinking-field" ref={canvasRef} aria-hidden="true" />;
+}
+
 function Hero() {
   return (
     <header className="hero">
+      <ThinkingField />
       <div className="hero-shell">
         <a className="brand" href="https://buildersforce.ai" aria-label="buildersforce.ai">
           <img className="brand-mark" src={buildersForceMark} alt="" />
