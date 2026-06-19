@@ -20,32 +20,22 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div className="footer-brand brand-text" style={{ marginBottom: '16px', fontSize: '1.25rem' }}>
+            <div className="footer-brand brand-text" style={{ marginBottom: '8px', fontSize: '1.25rem' }}>
               BUILDERS<span>FORCE</span> <span style={{ textTransform: 'none', fontWeight: 400, color: 'var(--slate)' }}>AI</span>
             </div>
-            <p style={{ maxWidth: '300px', color: 'var(--slate)', marginBottom: '32px' }}>
+            <p style={{ maxWidth: '300px', color: 'var(--slate)', marginBottom: '16px', fontSize: '0.9rem' }}>
               Engineering reliable, production-grade AI systems for the modern enterprise.
             </p>
-            <a href={`mailto:${GLOBAL.email}`} className="btn btn-primary">
+            <a href={`mailto:${GLOBAL.email}`} className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.875rem' }}>
               Start a Conversation
             </a>
           </div>
 
-          <div>
-            <h4>Company</h4>
-            <div className="footer-links">
+          <div style={{ textAlign: 'right' }}>
+            <div className="footer-links" style={{ marginTop: '16px' }}>
               {NAV_LINKS.map(link => (
                 <Link key={link.path} to={link.path}>{link.label}</Link>
               ))}
-            </div>
-          </div>
-
-          <div>
-            <h4>Legal & Trust</h4>
-            <div className="footer-links">
-              <Link to="#">Privacy Policy</Link>
-              <Link to="#">Terms of Service</Link>
-              <Link to="#">Security & Compliance</Link>
             </div>
           </div>
         </div>
