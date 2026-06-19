@@ -11,7 +11,7 @@ export default function Contact() {
 
   return (
     <main className="main-content">
-      <section className="section">
+      <section className="section" style={{ paddingBottom: '160px' }}>
         <div className="container grid-2 reveal">
           <div>
             <span className="eyebrow">Get in touch</span>

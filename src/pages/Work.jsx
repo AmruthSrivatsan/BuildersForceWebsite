@@ -11,7 +11,7 @@ export default function Work() {
 
   return (
     <main className="main-content">
-      <section className="section">
+      <section className="section" style={{ paddingBottom: '160px' }}>
         <div className="container">
           <div className="reveal">
             <span className="eyebrow">Selected Work</span>

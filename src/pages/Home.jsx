@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GLOBAL, PILLARS, SERVICES } from '../data/content';
-import heroBgImage from '../assets/cherry-hero-bg.png';
+import heroBgImage from '../assets/cherry-hero-bg.jpg';
 
 export default function Home() {
+  const [bgLoaded, setBgLoaded] = useState(false);
+
   useEffect(() => {
+    // Preload image so we can fade it in cleanly
+    const img = new Image();
+    img.src = heroBgImage;
+    img.onload = () => setBgLoaded(true);
+
     const elements = document.querySelectorAll('.reveal');
     setTimeout(() => {
       elements.forEach(el => el.classList.add('active'));
@@ -14,9 +21,15 @@ export default function Home() {
   return (
     <main className="main-content">
       <section className="hero">
-        <div className="hero-bg" style={{ backgroundImage: `url(${heroBgImage})` }}></div>
+        <div 
+          className="hero-bg" 
+          style={{ 
+            backgroundImage: `url(${heroBgImage})`,
+            opacity: bgLoaded ? 1 : 0,
+            transition: 'opacity 0.8s ease'
+          }}
+        ></div>
         <div className="container hero-content">
-          <span className="eyebrow"><span className="brand-text">BUILDERS<span>FORCE</span></span>.ai</span>
           <h1>We build AI that lands in production.</h1>
           <p>
             <span className="brand-text">BUILDERS<span>FORCE</span></span> partners with enterprise product and ops teams to go from problem discovery to production AI. No handoffs, no excuses. Just robust software delivery.
@@ -31,7 +44,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container">
           <div className="reveal grid-2" style={{ alignItems: 'center' }}>
             <div>
@@ -56,7 +69,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section section-dark">
+      <div style={{ width: '100%', lineHeight: 0, marginTop: '64px' }}>
+        <svg className="wave-transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style={{ width: '100%', display: 'block' }}>
+          <path fill="var(--navy)" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+        </svg>
+      </div>
+
+      <section className="section section-dark" style={{ paddingTop: '64px' }}>
         <div className="container">
           <div className="reveal">
             <span className="eyebrow" style={{ color: 'var(--white)', opacity: 0.7 }}>Our Capabilities</span>

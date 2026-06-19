@@ -11,7 +11,7 @@ export default function Team() {
 
   return (
     <main className="main-content">
-      <section className="section section-light">
+      <section className="section section-light" style={{ paddingBottom: '160px' }}>
         <div className="container">
           <div className="reveal">
             <span className="eyebrow">Leadership</span>
