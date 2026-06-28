@@ -5,10 +5,13 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Work from './pages/Work';
-import Team from './pages/Team';
+import Discover from './pages/Discover';
+import Build from './pages/Build';
+import Operate from './pages/Operate';
+import Accelerators from './pages/Accelerators';
+import WhatWeThink from './pages/WhatWeThink';
+import CaseStudies from './pages/CaseStudies';
+import WhoWeAre from './pages/WhoWeAre';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
@@ -19,10 +22,13 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/work" element={<Work />} />
-        <Route path="/team" element={<Team />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/build" element={<Build />} />
+        <Route path="/operate" element={<Operate />} />
+        <Route path="/accelerators" element={<Accelerators />} />
+        <Route path="/what-we-think" element={<WhatWeThink />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/who-we-are" element={<WhoWeAre />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

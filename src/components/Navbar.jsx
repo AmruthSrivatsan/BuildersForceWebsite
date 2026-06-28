@@ -37,21 +37,38 @@ export default function Navbar() {
   return (
     <>
       <nav className={`navbar ${scrolled ? 'is-scrolled' : ''} ${hidden ? 'is-hidden' : ''}`}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/" className="nav-logo-link">
+        <div className="container" style={{ display: 'flex', alignItems: 'center' }}>
+          <Link to="/" className="nav-logo-link" style={{ marginRight: 'auto' }}>
             <img src={logo} alt="Builders Force Logo" className="nav-logo-img" />
             <div className="nav-brand-text brand-text">BUILDERS<span>FORCE</span></div>
           </Link>
           
           <div className="nav-links">
-            {NAV_LINKS.map(link => (
-              <NavLink 
-                key={link.path} 
-                to={link.path} 
-                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              >
-                {link.label}
-              </NavLink>
+            {NAV_LINKS.map((link, index) => (
+              link.dropdown ? (
+                <div key={index} className="nav-dropdown-container">
+                  <span className="nav-link nav-dropdown-toggle">{link.label}</span>
+                  <div className="nav-dropdown-menu">
+                    {link.dropdown.map(sublink => (
+                      <NavLink 
+                        key={sublink.path} 
+                        to={sublink.path} 
+                        className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                      >
+                        {sublink.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <NavLink 
+                  key={link.path} 
+                  to={link.path} 
+                  className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                >
+                  {link.label}
+                </NavLink>
+              )
             ))}
           </div>
 
@@ -74,14 +91,33 @@ export default function Navbar() {
       {menuOpen && (
         <div className="nav-mobile-menu">
           <div className="nav-mobile-links">
-            {NAV_LINKS.map(link => (
-              <NavLink 
-                key={link.path} 
-                to={link.path} 
-                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              >
-                {link.label}
-              </NavLink>
+            {NAV_LINKS.map((link, index) => (
+              link.dropdown ? (
+                <div key={index} className="mobile-dropdown-group">
+                  <span className="nav-link mobile-dropdown-title" style={{ color: '#8892B0', fontSize: '1rem', textTransform: 'uppercase', marginBottom: '8px', display: 'block' }}>{link.label}</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingLeft: '16px' }}>
+                    {link.dropdown.map(sublink => (
+                      <NavLink 
+                        key={sublink.path} 
+                        to={sublink.path} 
+                        className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {sublink.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <NavLink 
+                  key={link.path} 
+                  to={link.path} 
+                  className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              )
             ))}
           </div>
         </div>
