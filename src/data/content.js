@@ -17,8 +17,8 @@ export const NAV_LINKS = [
       { path: '/operate', label: 'Operate' },
     ]
   },
-  { path: '/accelerators', label: 'Accelerators' },
   { path: '/what-we-think', label: 'What we think' },
+  { path: '/accelerators', label: 'Accelerators' },
   { path: '/case-studies', label: 'Case Studies' },
   { path: '/who-we-are', label: 'Who we are' },
   { path: '/contact', label: 'Contact' }, // Keeping Contact as button action in navbar
