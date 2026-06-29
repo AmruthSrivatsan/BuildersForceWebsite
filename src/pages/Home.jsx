@@ -122,12 +122,6 @@ export default function Home() {
                   Error rate in our proprietary data extraction pipelines.
                 </p>
               </div>
-              <div className="home-metric-divider" />
-              <div className="home-metric-item">
-                <Link to="/what-we-think" className="btn btn-outline" style={{ fontSize: '0.95rem' }}>
-                  Read our philosophy →
-                </Link>
-              </div>
             </div>
           </FadeIn>
         </div>
