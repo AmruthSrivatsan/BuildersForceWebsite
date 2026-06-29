@@ -52,8 +52,8 @@ export const WORK = [
       { metric: '100%', label: 'Adoption Rate' },
       { metric: 'Zero', label: 'Data Breaches' }
     ],
-    link: 'https://timesofindia.indiatimes.com/india/interpol-like-software-abhay-launched-for-tracking-criminals/articleshow/115655768.cms',
-    linkText: 'Read Times of India Coverage',
+    link: 'https://www.thehindu.com/news/national/cbi-launches-ai-powered-notice-verification-system-abhay/article70984297.ece',
+    linkText: 'Read The Hindu Coverage',
   },
   {
     tag: 'US Real Estate',
