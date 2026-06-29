@@ -42,12 +42,12 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-content">
           <FadeIn>
-            <h1>We build AI that lands in production.</h1>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: 1.1 }}>AI that Builds, Values that Last</h1>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--blue)', marginTop: '1.5rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              An AI company that every outcome focused business can rely on.
+            </h2>
             <p>
-              The gap between an AI prototype and a real-world system is where most teams get stuck.{' '}
-              <span className="brand-text">BUILDERS<span>FORCE</span></span> bridges that gap. 
-              We deliver robust, production-ready software—with ownership, not advisory. 
-              No handoffs. No excuses.
+              We partner with teams to discover the right problems, build intelligent solutions, and deliver measurable outcomes at scale.
             </p>
             <div className="hero-actions">
               <a href={`mailto:${GLOBAL.email}`} className="btn btn-primary">

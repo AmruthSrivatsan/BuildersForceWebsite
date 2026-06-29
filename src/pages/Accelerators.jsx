@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ACCELERATORS } from '../data/content';
 import FadeIn from '../components/FadeIn';
 
@@ -29,9 +30,9 @@ export default function Accelerators() {
                   <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>{accel.title}</h2>
                   <p style={{ fontSize: '1.125rem' }}>{accel.description}</p>
                   <div className="mt-4">
-                    <a href={accel.demoLink} className="btn btn-primary">
-                      Demo Link
-                    </a>
+                    <Link to="/contact" className="btn btn-primary">
+                      Contact us to setup a demo
+                    </Link>
                   </div>
                 </div>
               </FadeIn>

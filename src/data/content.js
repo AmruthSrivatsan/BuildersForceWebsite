@@ -2,7 +2,7 @@ import suryanHeadshot from '../assets/suryan-headshot.jpeg';
 import venkatHeadshot from '../assets/venkat-headshot.jpeg';
 
 export const GLOBAL = {
-  email: 'contact@buildersforce.ai',
+  email: 'suryan@buildersforce.ai',
   companyName: 'Builders Force AI Pvt Ltd',
   year: new Date().getFullYear(),
 };
@@ -57,11 +57,11 @@ export const WORK = [
   },
   {
     tag: 'US Real Estate',
-    title: 'AI-Powered Leasing Verification',
-    description: 'Developed an intelligent platform for a major US real estate firm to automate the parsing, verification, and extraction of critical data from complex leasing documents. The system parses unstructured PDFs into structured SQL schemas with deterministic accuracy.',
+    title: 'AI-first Lease Intelligence Platform',
+    description: 'A boutique partner with a stealth AI startup working to disrupt property management in the commercial real estate sector.',
     impact: [
-      { metric: '85%', label: 'Time Saved per Lease' },
-      { metric: '<1%', label: 'Error Rate' }
+      { metric: '5x', label: 'Productivity Increase' },
+      { metric: '80%', label: 'Revenue Leaks Plugged' }
     ],
     linkText: 'Proprietary Engagement',
     isProprietary: true,
@@ -105,17 +105,14 @@ export const ACCELERATORS = [
   {
     title: 'StudyEdge',
     description: 'This accelerator is an edge-first, AI-powered tutor that evaluates student reading with real-time pronunciation feedback, answers curiosity questions using grounded web scraping, and translates concepts into Indic languages—all while feeding actionable performance metrics directly to teacher dashboards.',
-    demoLink: '#'
   },
   {
     title: 'LegalEdge',
     description: 'Our accelerator is an enterprise-grade legal AI orchestrator built for high-stakes professional work. We combine multi-model agentic workflows with a rigorous verification stack to deliver secure, hallucination-free legal reasoning at scale, giving you the fastest path from raw information to actionable decisions.',
-    demoLink: '#'
   },
   {
     title: 'MedicalEdge',
     description: 'This accelerator turns every patient record : text, labs, and imaging,  into an automated, end-to-end clinical audit that runs entirely on-premise: an AI second opinion that validates diagnoses, flags prescription errors, and documents decision quality across every department, giving hospitals both a malpractice shield and a quality engine while keeping all PHI air-gapped and compliant',
-    demoLink: '#'
   }
 ];
 
