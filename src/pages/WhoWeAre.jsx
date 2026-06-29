@@ -11,7 +11,7 @@ export default function WhoWeAre() {
             <span className="eyebrow">Who we are</span>
             <h1>The minds behind <span className="brand-text">BUILDERS<span>FORCE</span></span>.</h1>
             <p style={{ maxWidth: '700px', marginBottom: '64px', fontSize: '1.25rem' }}>
-              Led by engineers with a track record of scaling complex systems. We combine deep technical expertise with pragmatic business execution.
+              We are a team of builders, solvers, and partners who believe in execution over intent. Led by engineers with decades of experience, we combine empathy-led problem solving with deep technical expertise to deliver outcomes that actually matter.
             </p>
           </FadeIn>
 

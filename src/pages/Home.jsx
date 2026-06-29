@@ -1,17 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GLOBAL } from '../data/content';
 import FadeIn from '../components/FadeIn';
 
+const PANELS = [
+  {
+    label: 'Builder Mindset',
+    points: [
+      { title: 'Ownership over advisory', desc: 'We\'re in it with you, not watching from the side.' },
+      { title: 'Execution over intent', desc: 'Good plans mean nothing without delivery.' },
+      { title: 'Outcomes over activity', desc: 'We measure by results, not effort reported.' },
+      { title: 'We create, solve & deliver', desc: 'Builders, solvers, producers, partners.' },
+    ],
+  },
+  {
+    label: 'Force Multiplier',
+    points: [
+      { title: 'Empathy-led problem solving', desc: 'We understand the human before the problem.' },
+      { title: 'Compelling ROI', desc: 'Every engagement should pay for itself, fast.' },
+      { title: 'Seamless integration', desc: 'Fits into your world, not the other way around.' },
+      { title: 'Relentless momentum', desc: 'We don\'t slow down after kickoff.' },
+    ],
+  },
+  {
+    label: 'AI Acceleration',
+    points: [
+      { title: 'AI-powered acceleration', desc: 'Speed with intent, not automation for its own sake.' },
+      { title: 'People + Process + Technology', desc: 'The intersection where transformation happens.' },
+      { title: 'Solvers who take responsibility', desc: 'We own the outcome, not just the output.' },
+      { title: 'Producers who deliver', desc: 'Work ships, value lands, impact is felt.' },
+    ],
+  },
+];
+
 export default function Home() {
+  const [active, setActive] = useState(0);
+
   return (
     <main className="main-content">
+      {/* ── HERO ── */}
       <section className="hero">
         <div className="container hero-content">
           <FadeIn>
             <h1>We build AI that lands in production.</h1>
             <p>
-              <span className="brand-text">BUILDERS<span>FORCE</span></span> partners with enterprise product and ops teams to go from problem discovery to production AI. No handoffs, no excuses. Just robust software delivery.
+              The gap between an AI prototype and a real-world system is where most teams get stuck.{' '}
+              <span className="brand-text">BUILDERS<span>FORCE</span></span> bridges that gap. 
+              We deliver robust, production-ready software—with ownership, not advisory. 
+              No handoffs. No excuses.
             </p>
             <div className="hero-actions">
               <a href={`mailto:${GLOBAL.email}`} className="btn btn-primary">
@@ -24,27 +60,73 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── WHAT DRIVES US ── */}
       <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container">
           <FadeIn>
-            <div className="grid-2" style={{ alignItems: 'center' }}>
-              <div>
-                <span className="eyebrow">Why <span className="brand-text">BUILDERS<span>FORCE</span></span></span>
-                <h2>The bridge between prototypes and production.</h2>
-                <p>
-                  Many can build a demo; few can engineer a secure, compliant, and reliable system that operates flawlessly at scale. We combine deep engineering expertise with a pragmatic approach to AI integration.
-                </p>
-                <Link to="/what-we-think" className="btn btn-outline mt-4">Read our philosophy</Link>
+            <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+              <span className="eyebrow">What drives us</span>
+              <h2 style={{ maxWidth: '640px', margin: '0 auto 1rem' }}>
+                The bridge between prototypes and production.
+              </h2>
+              <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+                Many can build a demo; few can engineer a secure, compliant, and reliable system
+                that operates flawlessly at scale.
+              </p>
+            </div>
+
+            {/* Tab strip */}
+            <div className="home-tabs-wrapper">
+              <div className="home-tabs">
+                {PANELS.map((panel, i) => (
+                  <button
+                    key={i}
+                    className={`home-tab-btn${active === i ? ' home-tab-btn--active' : ''}`}
+                    onClick={() => setActive(i)}
+                  >
+                    {panel.label}
+                  </button>
+                ))}
               </div>
-              <div className="grid-2" style={{ gap: '24px' }}>
-                <div className="card">
-                  <div className="metric-number">100%</div>
-                  <p style={{ color: 'var(--slate-dark)', fontSize: '0.95rem' }}>Adoption in critical law enforcement systems.</p>
+            </div>
+
+            {/* Panel content */}
+            <div className="home-tab-panel">
+              {PANELS[active].points.map((pt, i) => (
+                <div key={i} className="home-tab-card" style={{ animationDelay: `${i * 0.1}s` }}>
+                  <div className="home-tab-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <div className="home-tab-card-content">
+                    <h3>{pt.title}</h3>
+                    <p>{pt.desc}</p>
+                  </div>
                 </div>
-                <div className="card">
-                  <div className="metric-number">&lt;1%</div>
-                  <p style={{ color: 'var(--slate-dark)', fontSize: '0.95rem' }}>Error rate in our proprietary data extraction pipelines.</p>
-                </div>
+              ))}
+            </div>
+
+            {/* Metrics strip */}
+            <div className="home-metrics">
+              <div className="home-metric-item">
+                <div className="metric-number">100%</div>
+                <p style={{ color: 'var(--slate-dark)', fontSize: '0.95rem', marginBottom: 0 }}>
+                  Adoption in critical law enforcement systems.
+                </p>
+              </div>
+              <div className="home-metric-divider" />
+              <div className="home-metric-item">
+                <div className="metric-number">&lt;1%</div>
+                <p style={{ color: 'var(--slate-dark)', fontSize: '0.95rem', marginBottom: 0 }}>
+                  Error rate in our proprietary data extraction pipelines.
+                </p>
+              </div>
+              <div className="home-metric-divider" />
+              <div className="home-metric-item">
+                <Link to="/what-we-think" className="btn btn-outline" style={{ fontSize: '0.95rem' }}>
+                  Read our philosophy →
+                </Link>
               </div>
             </div>
           </FadeIn>
