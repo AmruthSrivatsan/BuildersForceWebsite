@@ -11,7 +11,7 @@ export default function WhatWeThink() {
               <span className="eyebrow">Insights</span>
               <h1>What We Think</h1>
               <p className="mt-4" style={{ fontSize: '1.25rem' }}>
-                Thoughts, perspectives, and architectural insights from our engineering team.
+                Thoughts and perspectives from our team.
               </p>
             </div>
           </FadeIn>
@@ -44,9 +44,9 @@ export default function WhatWeThink() {
                   <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                 </svg>
               </div>
-              <h2 style={{ fontSize: '2.25rem', marginBottom: '16px', color: 'var(--navy)' }}>Insights coming soon.</h2>
+              <h2 style={{ fontSize: '2.25rem', marginBottom: '16px', color: 'var(--navy)' }}>Coming soon.</h2>
               <p style={{ fontSize: '1.125rem', color: 'var(--slate-dark)', maxWidth: '500px' }}>
-                Our engineering and leadership teams are currently heads-down building. We'll be sharing our technical deep dives and architectural blueprints here shortly.
+                We're currently busy building for our clients. We'll be sharing our thoughts and experiences here soon.
               </p>
             </div>
           </FadeIn>
