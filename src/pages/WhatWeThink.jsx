@@ -1,5 +1,4 @@
 import React from 'react';
-import { BLOG_STUBS } from '../data/content';
 import FadeIn from '../components/FadeIn';
 
 export default function WhatWeThink() {
@@ -17,32 +16,40 @@ export default function WhatWeThink() {
             </div>
           </FadeIn>
           
-          <div className="grid-3">
-            {BLOG_STUBS.map((blog, index) => (
-              <FadeIn key={index} delay={index * 100}>
-                <a href={blog.link} className="card" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit' }}>
-                  <div style={{ flex: 1 }}>
-                    <span style={{ fontSize: '0.875rem', color: 'var(--blue)', fontWeight: '600', marginBottom: '12px', display: 'block' }}>
-                      {blog.date}
-                    </span>
-                    <h3 style={{ marginBottom: '16px', fontSize: '1.5rem', lineHeight: '1.3' }}>
-                      {blog.title}
-                    </h3>
-                    <p style={{ fontSize: '1rem', color: 'var(--slate-dark)' }}>
-                      {blog.excerpt}
-                    </p>
-                  </div>
-                  <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--blue)', fontWeight: '600', fontSize: '0.875rem' }}>
-                    Read Article
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </div>
-                </a>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn delay={200}>
+            <div style={{
+              background: 'var(--off-white)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-lg)',
+              padding: '80px 32px',
+              textAlign: 'center',
+              marginTop: '48px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                background: 'var(--blue-light)',
+                color: 'var(--blue)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '24px'
+              }}>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+              </div>
+              <h2 style={{ fontSize: '2.25rem', marginBottom: '16px', color: 'var(--navy)' }}>Insights coming soon.</h2>
+              <p style={{ fontSize: '1.125rem', color: 'var(--slate-dark)', maxWidth: '500px' }}>
+                Our engineering and leadership teams are currently heads-down building. We'll be sharing our technical deep dives and architectural blueprints here shortly.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>
