@@ -30,9 +30,19 @@ export default function Accelerators() {
                   <h2 style={{ fontSize: '2rem', marginBottom: '16px' }}>{accel.title}</h2>
                   <p style={{ fontSize: '1.125rem' }}>{accel.description}</p>
                   <div className="mt-4">
-                    <Link to="/contact" className="btn btn-primary">
-                      Contact us to setup a demo
-                    </Link>
+                    {accel.title === 'StudyEdge' ? (
+                      <Link to="/contact" className="btn btn-primary">
+                        Contact us to setup a demo
+                      </Link>
+                    ) : (
+                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--off-white)', padding: '10px 16px', borderRadius: '4px', border: '1px solid var(--border)', color: 'var(--slate-dark)', fontWeight: '600', fontSize: '0.95rem' }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        In the making — near production grade
+                      </div>
+                    )}
                   </div>
                 </div>
               </FadeIn>
